@@ -114,14 +114,13 @@ public static class Api
             MaxPageSize = 100
         });
         
-        requestExecutorBuilder.AddQueryableOffsetPagingProvider();
         requestExecutorBuilder.AddFiltering();
         requestExecutorBuilder.AddSorting();
         requestExecutorBuilder.AddProjections();
                 
         requestExecutorBuilder.AllowIntrospection(environment.IsProduction() is false);
         requestExecutorBuilder.AddQueryType<TQuery>();
-        requestExecutorBuilder.AddMutationType<TMutation>();
+        // requestExecutorBuilder.AddMutationType<TMutation>();
 
         requestExecutorBuilder.AddMutationConventions(applyToAllMutations: true);
 

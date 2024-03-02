@@ -1,8 +1,7 @@
 using System.Data;
-using EduPulse.Api;
 using EduPulse.Api.DependencyInjection;
 using EduPulse.Api.Rest.Middlewares;
-using EduPulse.Application;
+using EduPulse.Api.Rest.Routers;
 using EduPulse.Application.DependencyInjection;
 using EduPulse.Infrastructure;
 using EduPulse.Infrastructure.DependencyInjection;
@@ -84,5 +83,6 @@ app.MapGraphQL();
 
 var apiGroup = app.MapGroup("api");
 
+apiGroup.MapUsersRoutes();
 
 app.Run();

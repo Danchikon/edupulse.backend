@@ -11,5 +11,6 @@ public record CreateUserCommand : CommandBase<UserDto>
     public required string Email { get; set; }
     public required int Age { get; set; }
     public required UserRole Role { get; set; }
+    public required Guid GroupId { get; set; }
     public required string Password { get; init; }
 }

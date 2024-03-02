@@ -23,7 +23,8 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<UserEntity>
             .HasColumnType("user_role");
 
         builder
-            .HasMany(user => user.Groups)
-            .WithMany(group => group.Users);
+            .HasOne(user => user.Group)
+            .WithMany(group => group.Users)
+            .HasForeignKey(user => user.GroupId);
     }
 }

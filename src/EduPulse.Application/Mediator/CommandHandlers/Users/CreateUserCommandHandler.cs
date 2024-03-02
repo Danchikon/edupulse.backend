@@ -48,6 +48,7 @@ public class CreateUserCommandHandler : CommandHandlerBase<CreateUserCommand, Us
         var userEntity = new UserEntity
         {
             Id = userId,
+            GroupId = command.GroupId,
             PhoneNumber = command.PhoneNumber,
             Email = command.Email,
             FullName = command.FullName,

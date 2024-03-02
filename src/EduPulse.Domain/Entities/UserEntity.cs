@@ -12,6 +12,7 @@ public class UserEntity
     public required string PasswordHash { get; set; }
     public required UserRole Role { get; set; }
     public Uri? Avatar { get; set; }
-    public GroupEntity[] Groups { get; init; } = Array.Empty<GroupEntity>();
+    public GroupEntity? Group { get; set; }
+    public required Guid GroupId { get; set; }
     public DateTimeOffset CreatedAt { get; init; }
 }
