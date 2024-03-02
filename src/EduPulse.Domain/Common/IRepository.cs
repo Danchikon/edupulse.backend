@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace EduPulse.Domain.Common.Repositories;
+namespace EduPulse.Domain.Common;
 
 public interface IRepository<TEntity> 
 {

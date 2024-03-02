@@ -1,7 +1,7 @@
 using EduPulse.Application.Abstractions;
 using EduPulse.Application.Common.Mediator;
 using EduPulse.Application.Mediator.Commands.Users;
-using EduPulse.Domain.Common.Repositories;
+using EduPulse.Domain.Common;
 using EduPulse.Domain.Entities;
 
 namespace EduPulse.Application.Mediator.CommandHandlers.Users;

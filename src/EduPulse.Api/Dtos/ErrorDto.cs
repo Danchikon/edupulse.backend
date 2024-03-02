@@ -1,4 +1,4 @@
-using EduPulse.Domain.Common.Errors;
+using EduPulse.Domain.Common.Enums;
 
 namespace EduPulse.Api.Dtos;
 

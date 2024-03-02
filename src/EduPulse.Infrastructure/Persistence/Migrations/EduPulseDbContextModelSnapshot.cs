@@ -51,6 +51,24 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                     b.ToTable("groups", (string)null);
                 });
 
+            modelBuilder.Entity("EduPulse.Domain.Entities.SubjectEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_subjects");
+
+                    b.ToTable("subjects", (string)null);
+                });
+
             modelBuilder.Entity("EduPulse.Domain.Entities.UserEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -153,6 +171,25 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("GroupEntitySubjectEntity", b =>
+                {
+                    b.Property<Guid>("GroupsId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("groups_id");
+
+                    b.Property<Guid>("SubjectsId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("subjects_id");
+
+                    b.HasKey("GroupsId", "SubjectsId")
+                        .HasName("pk_group_entity_subject_entity");
+
+                    b.HasIndex("SubjectsId")
+                        .HasDatabaseName("ix_group_entity_subject_entity_subjects_id");
+
+                    b.ToTable("group_entity_subject_entity", (string)null);
+                });
+
             modelBuilder.Entity("EduPulse.Domain.Entities.UserEntity", b =>
                 {
                     b.HasOne("EduPulse.Domain.Entities.GroupEntity", "Group")
@@ -163,6 +200,23 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                         .HasConstraintName("fk_users_groups_group_id");
 
                     b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("GroupEntitySubjectEntity", b =>
+                {
+                    b.HasOne("EduPulse.Domain.Entities.GroupEntity", null)
+                        .WithMany()
+                        .HasForeignKey("GroupsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_group_entity_subject_entity_groups_groups_id");
+
+                    b.HasOne("EduPulse.Domain.Entities.SubjectEntity", null)
+                        .WithMany()
+                        .HasForeignKey("SubjectsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_group_entity_subject_entity_subjects_subjects_id");
                 });
 
             modelBuilder.Entity("EduPulse.Domain.Entities.GroupEntity", b =>

@@ -1,4 +1,4 @@
-namespace EduPulse.Domain.Common.Errors;
+namespace EduPulse.Domain.Common.Enums;
 
 public enum ErrorKind
 {

@@ -2,7 +2,7 @@ using EduPulse.Application.Abstractions;
 using EduPulse.Application.Common.Mediator;
 using EduPulse.Application.Dtos;
 using EduPulse.Application.Mediator.Queries.Users;
-using EduPulse.Domain.Common.Repositories;
+using EduPulse.Domain.Common;
 using EduPulse.Domain.Entities;
 using MapsterMapper;
 

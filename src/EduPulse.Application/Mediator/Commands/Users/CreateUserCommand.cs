@@ -2,7 +2,7 @@ using EduPulse.Application.Common.Mediator;
 using EduPulse.Application.Dtos;
 using EduPulse.Domain.Enums;
 
-namespace EduPulse.Application.Commands.Users;
+namespace EduPulse.Application.Mediator.Commands.Users;
 
 public record CreateUserCommand : CommandBase<UserDto>
 {

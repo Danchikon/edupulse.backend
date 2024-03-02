@@ -1,7 +1,6 @@
 using System.Linq.Expressions;
-using EduPulse.Domain.Common.Errors;
-using EduPulse.Domain.Common.Exceptions;
-using EduPulse.Domain.Common.Repositories;
+using EduPulse.Domain.Common;
+using EduPulse.Domain.Common.Enums;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 

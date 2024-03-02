@@ -1,6 +1,6 @@
 using EduPulse.Api.Dtos;
-using EduPulse.Domain.Common.Errors;
-using EduPulse.Domain.Common.Exceptions;
+using EduPulse.Domain.Common;
+using EduPulse.Domain.Common.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 

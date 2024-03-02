@@ -1,10 +1,10 @@
-using EduPulse.Application.Commands.UserGroups;
 using EduPulse.Application.Common.Mediator;
 using EduPulse.Application.Dtos;
-using EduPulse.Domain.Common.Repositories;
+using EduPulse.Application.Mediator.Commands.Groups;
+using EduPulse.Domain.Common;
 using EduPulse.Domain.Entities;
 
-namespace EduPulse.Application.CommandHandlers.Groups;
+namespace EduPulse.Application.Mediator.CommandHandlers.Groups;
 
 public class UpdateGroupCommandHandler : CommandHandlerBase<UpdateGroupCommand, GroupDto>
 {

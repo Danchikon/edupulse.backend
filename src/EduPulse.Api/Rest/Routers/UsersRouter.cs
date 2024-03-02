@@ -1,5 +1,4 @@
 using System.Security.Claims;
-using EduPulse.Application.Commands.Users;
 using EduPulse.Application.Dtos;
 using EduPulse.Application.Mediator.Commands.Users;
 using EduPulse.Application.Mediator.Queries.Users;

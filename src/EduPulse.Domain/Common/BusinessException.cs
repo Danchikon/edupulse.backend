@@ -1,6 +1,6 @@
-using EduPulse.Domain.Common.Errors;
+using EduPulse.Domain.Common.Enums;
 
-namespace EduPulse.Domain.Common.Exceptions;
+namespace EduPulse.Domain.Common;
 
 public class BusinessException : Exception
 {

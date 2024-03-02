@@ -120,7 +120,7 @@ public static class Api
                 
         requestExecutorBuilder.AllowIntrospection(environment.IsProduction() is false);
         requestExecutorBuilder.AddQueryType<TQuery>();
-        // requestExecutorBuilder.AddMutationType<TMutation>();
+        requestExecutorBuilder.AddMutationType<TMutation>();
 
         requestExecutorBuilder.AddMutationConventions(applyToAllMutations: true);
 

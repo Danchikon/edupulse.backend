@@ -1,30 +1,26 @@
 using EduPulse.Application.Abstractions;
-using EduPulse.Application.Commands.Users;
 using EduPulse.Application.Common.Mediator;
 using EduPulse.Application.Dtos;
-using EduPulse.Domain.Common.Errors;
-using EduPulse.Domain.Common.Exceptions;
-using EduPulse.Domain.Common.Repositories;
+using EduPulse.Application.Mediator.Commands.Users;
+using EduPulse.Domain.Common;
+using EduPulse.Domain.Common.Enums;
 using EduPulse.Domain.Entities;
 using MapsterMapper;
 
-namespace EduPulse.Application.CommandHandlers.Users;
+namespace EduPulse.Application.Mediator.CommandHandlers.Users;
 
 public class CreateUserCommandHandler : CommandHandlerBase<CreateUserCommand, UserDto>
 {
     private readonly IRepository<UserEntity> _usersRepository;
-    private readonly IMapper _mapper;
     private readonly IPasswordHasher _passwordHasher;
 
     public CreateUserCommandHandler(
         IRepository<UserEntity> usersRepository,
-        IPasswordHasher passwordHasher, 
-        IMapper mapper
+        IPasswordHasher passwordHasher
         )
     {
         _usersRepository = usersRepository;
         _passwordHasher = passwordHasher;
-        _mapper = mapper;
     }
 
     public override async Task<UserDto> Handle(CreateUserCommand command, CancellationToken cancellationToken)

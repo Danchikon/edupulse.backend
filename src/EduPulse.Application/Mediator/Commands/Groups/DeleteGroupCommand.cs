@@ -1,7 +1,6 @@
 using EduPulse.Application.Common.Mediator;
-using EduPulse.Domain.Entities;
 
-namespace EduPulse.Application.Commands.UserGroups;
+namespace EduPulse.Application.Mediator.Commands.Groups;
 
 public record DeleteGroupCommand : CommandBase
 {

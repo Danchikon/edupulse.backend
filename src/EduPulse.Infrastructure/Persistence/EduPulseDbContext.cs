@@ -10,6 +10,7 @@ public class EduPulseDbContext : DbContext
 {
     public required DbSet<UserEntity> Users { get; init; }
     public required DbSet<GroupEntity> Groups { get; init; }
+    public required DbSet<SubjectEntity> Subjects { get; init; }
     
     public EduPulseDbContext(DbContextOptions<EduPulseDbContext> options) : base(options)
     {

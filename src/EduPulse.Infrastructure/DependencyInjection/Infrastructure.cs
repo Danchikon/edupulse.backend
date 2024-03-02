@@ -1,7 +1,6 @@
 using System.Reflection;
 using EduPulse.Application.Abstractions;
 using EduPulse.Domain.Common;
-using EduPulse.Domain.Common.Repositories;
 using EduPulse.Domain.Entities;
 using EduPulse.Domain.Enums;
 using EduPulse.Infrastructure.Implementations;
