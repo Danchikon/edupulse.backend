@@ -54,8 +54,8 @@ public static class Infrastructure
     
     public static IServiceCollection AddEfRepositories<TDbContext>(this IServiceCollection services) where TDbContext : DbContext
     {
-        services.AddSingleton<IRepository<GroupEntity>, EfRepository<GroupEntity, TDbContext>>();
-        services.AddSingleton<IRepository<UserEntity>,  EfRepository<UserEntity, TDbContext>>();
+        services.AddScoped<IRepository<GroupEntity>, EfRepository<GroupEntity, TDbContext>>();
+        services.AddScoped<IRepository<UserEntity>,  EfRepository<UserEntity, TDbContext>>();
         
         return services;
     }

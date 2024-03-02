@@ -32,4 +32,8 @@
       <ProjectReference Include="..\EduPulse.Domain\EduPulse.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Persistence\Migrations\" />
+    </ItemGroup>
+
 </Project>

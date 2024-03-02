@@ -20,7 +20,7 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<UserEntity>
         
         builder
             .Property(user => user.Role)
-            .HasColumnType("role");
+            .HasColumnType("user_role");
 
         builder
             .HasMany(user => user.Groups)

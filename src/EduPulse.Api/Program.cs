@@ -1,3 +1,4 @@
+using System.Data;
 using EduPulse.Api;
 using EduPulse.Api.DependencyInjection;
 using EduPulse.Api.Rest.Middlewares;
@@ -5,6 +6,11 @@ using EduPulse.Application;
 using EduPulse.Application.DependencyInjection;
 using EduPulse.Infrastructure;
 using EduPulse.Infrastructure.DependencyInjection;
+using EduPulse.Infrastructure.Options;
+using EduPulse.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using Serilog;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
@@ -18,24 +24,65 @@ builder.Services.AddApi(builder.Configuration, builder.Environment);
 
 var app = builder.Build();
 
-app.UseMiddleware<ExceptionalMiddleware>();
+await using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateAsyncScope();
+var context = serviceScope.ServiceProvider.GetRequiredService<EduPulseDbContext>();
+
+await context.Database.MigrateAsync();
+
+if (context.Database.GetDbConnection() is NpgsqlConnection npgsqlConnection)
+{
+    if (npgsqlConnection.State is not ConnectionState.Open)
+    {
+        await npgsqlConnection.OpenAsync();
+    }
+    
+    try
+    {
+        await npgsqlConnection.ReloadTypesAsync();
+    }
+    finally
+    {
+        await npgsqlConnection.CloseAsync();
+    }
+
+}
 
 app.UseCors(corsPolicyBuilder =>
 {
-    corsPolicyBuilder.AllowAnyHeader();
-    corsPolicyBuilder.AllowAnyOrigin();
-    corsPolicyBuilder.AllowAnyMethod();
+    corsPolicyBuilder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
 });
 
-app.UseRouting();
+app.UseSerilogRequestLogging();
 
-if (app.Environment.IsProduction() is false)
+app.UseMiddleware<ExceptionalMiddleware>();
+
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(swaggerUiOptions =>
+    {
+        var swaggerOptions = app.Configuration
+            .GetSection(SwaggerOptions.Section)
+            .Get<SwaggerOptions>()!;
+
+        swaggerUiOptions.RoutePrefix = swaggerOptions.RoutePrefix;
+        
+        foreach (var swaggerEndpoint in swaggerOptions.Endpoints)
+        {
+            swaggerUiOptions.SwaggerEndpoint(swaggerEndpoint.Url, swaggerEndpoint.Name);
+        }
+    });
 }
 
-app.MapGraphQL();
-app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
 
-await app.RunAsync();
+app.MapGraphQL();
+
+var apiGroup = app.MapGroup("api");
+
+
+app.Run();

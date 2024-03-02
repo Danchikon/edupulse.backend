@@ -8,19 +8,16 @@ namespace EduPulse.Api.Rest.Middlewares;
 
 public class ExceptionalMiddleware
 {
-    private readonly IActionResultExecutor<ObjectResult> _actionResultExecutor;
     private readonly ILogger< ExceptionalMiddleware> _logger;
     private readonly RequestDelegate _next;
 
     public ExceptionalMiddleware(
         RequestDelegate next,
-        ILogger< ExceptionalMiddleware> logger,
-        IActionResultExecutor<ObjectResult> actionResultExecutor
+        ILogger< ExceptionalMiddleware> logger
         )
     {
         _next = next;
         _logger = logger;
-        _actionResultExecutor = actionResultExecutor;
     }
 
     public async Task Invoke(HttpContext context)
@@ -42,18 +39,17 @@ public class ExceptionalMiddleware
                     exception.ToString()
                 }
             };
-            
-            await _actionResultExecutor.ExecuteAsync(new ActionContext { HttpContext = context }, new ObjectResult(errorDto)
+
+            context.Response.StatusCode = errorDto.Kind switch
             {
-                StatusCode = errorDto.Kind switch
-                {
-                    ErrorKind.InvalidData => StatusCodes.Status400BadRequest,
-                    ErrorKind.InvalidOperation => StatusCodes.Status409Conflict,
-                    ErrorKind.NotFound => StatusCodes.Status404NotFound,
-                    ErrorKind.PermissionDenied => StatusCodes.Status403Forbidden,
-                    _ => StatusCodes.Status500InternalServerError
-                }
-            });
+                ErrorKind.InvalidData => StatusCodes.Status400BadRequest,
+                ErrorKind.InvalidOperation => StatusCodes.Status409Conflict,
+                ErrorKind.NotFound => StatusCodes.Status404NotFound,
+                ErrorKind.PermissionDenied => StatusCodes.Status403Forbidden,
+                _ => StatusCodes.Status500InternalServerError
+            };
+            
+            await context.Response.WriteAsJsonAsync(errorDto);
         }
         catch (Exception exception)
         {
@@ -68,8 +64,9 @@ public class ExceptionalMiddleware
                     exception.ToString()
                 }
             };
-            
-            await _actionResultExecutor.ExecuteAsync(new ActionContext { HttpContext = context },  new ObjectResult(errorDto));
+
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            await context.Response.WriteAsJsonAsync(errorDto);
         }
     }
 }
