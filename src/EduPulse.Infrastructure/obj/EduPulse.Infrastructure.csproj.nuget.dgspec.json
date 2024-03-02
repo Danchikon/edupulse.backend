@@ -1,0 +1,270 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Infrastructure/EduPulse.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Application/EduPulse.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Application/EduPulse.Application.csproj",
+        "projectName": "EduPulse.Application",
+        "projectPath": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Application/EduPulse.Application.csproj",
+        "packagesPath": "/home/danchyk/.nuget/packages/",
+        "outputPath": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/danchyk/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Domain/EduPulse.Domain.csproj": {
+                "projectPath": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Domain/EduPulse.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FastExpressionCompiler": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Mapster": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            },
+            "Mapster.DependencyInjection": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/8.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Domain/EduPulse.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Domain/EduPulse.Domain.csproj",
+        "projectName": "EduPulse.Domain",
+        "projectPath": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Domain/EduPulse.Domain.csproj",
+        "packagesPath": "/home/danchyk/.nuget/packages/",
+        "outputPath": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/danchyk/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/8.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Infrastructure/EduPulse.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Infrastructure/EduPulse.Infrastructure.csproj",
+        "projectName": "EduPulse.Infrastructure",
+        "projectPath": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Infrastructure/EduPulse.Infrastructure.csproj",
+        "packagesPath": "/home/danchyk/.nuget/packages/",
+        "outputPath": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/danchyk/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Application/EduPulse.Application.csproj": {
+                "projectPath": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Application/EduPulse.Application.csproj"
+              },
+              "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Domain/EduPulse.Domain.csproj": {
+                "projectPath": "/home/danchyk/Projects/github/VeteranBot.Gateway/src/EduPulse.Domain/EduPulse.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Bogus": {
+              "target": "Package",
+              "version": "[35.4.0, )"
+            },
+            "EFCore.NamingConventions": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
+            "Mapster.EFCore": {
+              "target": "Package",
+              "version": "[5.1.1, )"
+            },
+            "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.IdentityModel.JsonWebTokens": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            },
+            "Minio": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Polly.Extensions.Http": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Quartz.AspNetCore": {
+              "target": "Package",
+              "version": "[3.8.0, )"
+            },
+            "Quartz.Serialization.Json": {
+              "target": "Package",
+              "version": "[3.8.1, )"
+            },
+            "Serilog.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Serilog.Settings.Configuration": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/8.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
