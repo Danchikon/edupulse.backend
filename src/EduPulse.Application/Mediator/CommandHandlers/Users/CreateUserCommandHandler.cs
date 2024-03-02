@@ -9,13 +9,13 @@ using MapsterMapper;
 
 namespace EduPulse.Application.Mediator.CommandHandlers.Users;
 
-public class CreateUserCommandHandler : CommandHandlerBase<CreateUserCommand, UserDto>
+public class CreateUserCommandHandler : CommandHandlerBase<CreateUserCommand, StudentDto>
 {
-    private readonly IRepository<UserEntity> _usersRepository;
+    private readonly IRepository<StudentEntity> _usersRepository;
     private readonly IPasswordHasher _passwordHasher;
 
     public CreateUserCommandHandler(
-        IRepository<UserEntity> usersRepository,
+        IRepository<StudentEntity> usersRepository,
         IPasswordHasher passwordHasher
         )
     {
@@ -23,7 +23,7 @@ public class CreateUserCommandHandler : CommandHandlerBase<CreateUserCommand, Us
         _passwordHasher = passwordHasher;
     }
 
-    public override async Task<UserDto> Handle(CreateUserCommand command, CancellationToken cancellationToken)
+    public override async Task<StudentDto> Handle(CreateUserCommand command, CancellationToken cancellationToken)
     {
         var anyUser = await _usersRepository.AnyAsync(user => user.Email == command.Email, cancellationToken);
 
@@ -41,7 +41,7 @@ public class CreateUserCommandHandler : CommandHandlerBase<CreateUserCommand, Us
 
         var passwordHash = _passwordHasher.Hash(command.Password);
         
-        var userEntity = new UserEntity
+        var userEntity = new StudentEntity
         {
             Id = userId,
             GroupId = command.GroupId,
@@ -49,12 +49,11 @@ public class CreateUserCommandHandler : CommandHandlerBase<CreateUserCommand, Us
             Email = command.Email,
             FullName = command.FullName,
             Age = command.Age,
-            Role = command.Role,
             PasswordHash = passwordHash,
             CreatedAt = createdAt
         };
 
-        var userDto = await _usersRepository.AddAsync<UserDto>(userEntity, cancellationToken);
+        var userDto = await _usersRepository.AddAsync<StudentDto>(userEntity, cancellationToken);
 
         return userDto;
     }

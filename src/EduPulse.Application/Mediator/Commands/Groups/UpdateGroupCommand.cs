@@ -6,5 +6,5 @@ namespace EduPulse.Application.Mediator.Commands.Groups;
 public record UpdateGroupCommand : CommandBase<GroupDto>
 {
     public required Guid Id { get; init; }
-    public required string Title { get; set; }
+    public required string Title { get; init; }
 }

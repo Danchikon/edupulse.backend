@@ -8,11 +8,11 @@ namespace EduPulse.Application.Mediator.CommandHandlers.Users;
 
 public class UploadUserAvatarCommandHandler: CommandHandlerBase<UploadUserAvatarCommand, Uri>
 {
-    private readonly IRepository<UserEntity> _usersRepository;
+    private readonly IRepository<StudentEntity> _usersRepository;
     private readonly IFilesStorage _filesStorage;
 
     public UploadUserAvatarCommandHandler(
-        IRepository<UserEntity> usersRepository,
+        IRepository<StudentEntity> usersRepository,
         IFilesStorage filesStorage
         )
     {

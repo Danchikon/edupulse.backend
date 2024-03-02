@@ -12,17 +12,17 @@ public class Query
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<UserDto> GetPagedUsers([Service] EduPulseDbContext dbContext)
+    public IQueryable<StudentDto> GetPagedUsers([Service] EduPulseDbContext dbContext)
     {
-        return dbContext.Users.ProjectToType<UserDto>();
+        return dbContext.Students.ProjectToType<StudentDto>();
     }
     
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<UserDto> GetUsers([Service] EduPulseDbContext dbContext)
+    public IQueryable<StudentDto> GetUsers([Service] EduPulseDbContext dbContext)
     {
-        return dbContext.Users.ProjectToType<UserDto>();
+        return dbContext.Students.ProjectToType<StudentDto>();
     }
     
     [UseOffsetPaging]
@@ -33,13 +33,46 @@ public class Query
     {
         return dbContext.Groups.ProjectToType<GroupDto>();
     }
-   
-    [UseOffsetPaging]
+    
     [UseProjection]
     [UseFiltering]
     [UseSorting]
     public IQueryable<GroupDto> GetGroups([Service] EduPulseDbContext dbContext)
     {
         return dbContext.Groups.ProjectToType<GroupDto>();
+    }
+    
+    [UseOffsetPaging]
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<TestDto> GetPagedTests([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.Tests.ProjectToType<TestDto>();
+    }
+    
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<TestDto> GetTests([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.Tests.ProjectToType<TestDto>();
+    }
+    
+    [UseOffsetPaging]
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<SubjectDto> GetPagedSubjects([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.Subjects.ProjectToType<SubjectDto>();
+    }
+    
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<SubjectDto> GetSubjects([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.Subjects.ProjectToType<SubjectDto>();
     }
 }

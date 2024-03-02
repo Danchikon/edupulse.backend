@@ -4,8 +4,9 @@ using EduPulse.Domain.Enums;
 
 namespace EduPulse.Application.Mediator.Commands.Users;
 
-public record CreateUserCommand : CommandBase<StudentDto>
+public record UpdateUserCommand : CommandBase<StudentDto>
 {
+    public required Guid Id { get; init; }
     public required string PhoneNumber { get; init; }
     public required string FullName { get; init; }
     public required string Email { get; init; }

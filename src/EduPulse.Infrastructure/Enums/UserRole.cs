@@ -1,4 +1,4 @@
-namespace EduPulse.Domain.Enums;
+namespace EduPulse.Infrastructure.Enums;
 
 public enum UserRole
 {

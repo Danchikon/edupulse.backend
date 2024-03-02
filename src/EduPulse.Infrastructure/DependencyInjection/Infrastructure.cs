@@ -3,6 +3,7 @@ using EduPulse.Application.Abstractions;
 using EduPulse.Domain.Common;
 using EduPulse.Domain.Entities;
 using EduPulse.Domain.Enums;
+using EduPulse.Infrastructure.Enums;
 using EduPulse.Infrastructure.Implementations;
 using EduPulse.Infrastructure.Options;
 using EduPulse.Infrastructure.Persistence;
@@ -31,10 +32,13 @@ public static class Infrastructure
         services.AddMinioFilesStorage();
         services.AddPasswordHasher();
         services.AddJsonWebTokenService();
+        services.AddSingleton<ITestScheduler, QuartzTestScheduler>();
+        services.AddKeyedSingleton("tests", new SemaphoreSlim(1));
         
         services.AddPostgresDataSource(dataSourceBuilderConfigurator =>
         {
             dataSourceBuilderConfigurator.MapEnum<UserRole>();
+            dataSourceBuilderConfigurator.MapEnum<TestStatus>();
         });
         
         services.AddEfPostgres<EduPulseDbContext>();
@@ -54,7 +58,9 @@ public static class Infrastructure
     public static IServiceCollection AddEfRepositories<TDbContext>(this IServiceCollection services) where TDbContext : DbContext
     {
         services.AddScoped<IRepository<GroupEntity>, EfRepository<GroupEntity, TDbContext>>();
-        services.AddScoped<IRepository<UserEntity>,  EfRepository<UserEntity, TDbContext>>();
+        services.AddScoped<IRepository<StudentEntity>,  EfRepository<StudentEntity, TDbContext>>();
+        services.AddScoped<IRepository<TestEntity>, EfRepository<TestEntity, TDbContext>>();
+        services.AddScoped<IRepository<SubjectEntity>,  EfRepository<SubjectEntity, TDbContext>>();
         
         return services;
     }

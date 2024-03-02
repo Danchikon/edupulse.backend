@@ -5,5 +5,5 @@ namespace EduPulse.Application.Mediator.Commands.Groups;
 
 public record CreateGroupCommand : CommandBase<GroupDto>
 {
-    public required string Title { get; set; }
+    public required string Title { get; init; }
 }
