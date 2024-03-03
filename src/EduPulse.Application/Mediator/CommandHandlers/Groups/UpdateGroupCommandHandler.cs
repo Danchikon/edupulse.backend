@@ -17,13 +17,12 @@ public class UpdateGroupCommandHandler : CommandHandlerBase<UpdateGroupCommand, 
     
     public override async Task<GroupDto> Handle(UpdateGroupCommand command, CancellationToken cancellationToken)
     {
-        var group = new GroupEntity
-        {
-            Id = command.Id,
-            Title = command.Title,
-        };
+        var groupEntity = await _groupsRepository.SingleAsync(group => group.Id == command.Id, cancellationToken);
 
-        var groupDto = await _groupsRepository.UpdateAsync<GroupDto>(group, cancellationToken);
+        groupEntity.Title = command.Title;
+        groupEntity.InstituteId = command.InstituteId;
+
+        var groupDto = await _groupsRepository.UpdateAsync<GroupDto>(groupEntity, cancellationToken);
 
         return groupDto;
     }

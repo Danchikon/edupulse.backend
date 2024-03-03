@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using EduPulse.Application.Dtos;
+using EduPulse.Application.Mediator.Commands.Students;
 using EduPulse.Application.Mediator.Commands.Users;
 using EduPulse.Application.Mediator.Queries.Students;
 using EduPulse.Infrastructure.Enums;
@@ -13,27 +14,6 @@ public static class StudentsRouter
 {
     public static IEndpointRouteBuilder MapStudentsRoutes(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/sign-up",async (
-            [FromBody] CreateStudentCommand command,
-            IMediator mediator, 
-            JsonWebTokenService jsonWebTokenService,
-            CancellationToken cancellationToken
-        ) =>
-        {
-            var userDto = await mediator.Send(command, cancellationToken);
-
-            var token = jsonWebTokenService.Create(new Dictionary<string, object>
-            {
-                ["sub"] =  userDto.Id
-            });
-            
-            return Results.Ok(new
-            {
-                User = userDto,
-                AccessToken = token
-            });
-        });
-        
         endpoints.MapPost("/sign-in",async (
             [FromBody] CheckStudentPasswordQuery query,
             IMediator mediator, 
@@ -50,7 +30,8 @@ public static class StudentsRouter
             
             var token = jsonWebTokenService.Create(new Dictionary<string, object>
             {
-                ["sub"] =  userDto.Id
+                ["sub"] =  userDto.Id,
+                ["role"] = UserRole.Student
             });
             
             return Results.Ok(new
@@ -74,7 +55,7 @@ public static class StudentsRouter
                     return Results.Forbid();
                 }
 
-                var userId = Guid.Parse(userIdString);
+                var studentId = Guid.Parse(userIdString);
 
                 await using var fileStream = avatar.OpenReadStream();
 
@@ -86,7 +67,7 @@ public static class StudentsRouter
 
                 var command = new UploadStudentAvatarCommand
                 {
-                    StudentId = userId,
+                    StudentId = studentId,
                     Avatar = fileDto
                 };
 

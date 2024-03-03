@@ -1,7 +1,11 @@
 using System.Security.Claims;
 using EduPulse.Application.Dtos;
+using EduPulse.Application.Mediator.Commands.Students;
 using EduPulse.Application.Mediator.Commands.Users;
+using EduPulse.Application.Mediator.Queries.Students;
+using EduPulse.Application.Mediator.Queries.Teachers;
 using EduPulse.Infrastructure.Enums;
+using EduPulse.Infrastructure.Implementations;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +15,55 @@ public static class TeachersRouter
 {
     public static IEndpointRouteBuilder MapTeacherRoutes(this IEndpointRouteBuilder endpoints)
     {
+        endpoints.MapPost("/sign-up",async (
+            [FromBody] CreateTeacherCommand command,
+            IMediator mediator, 
+            JsonWebTokenService jsonWebTokenService,
+            CancellationToken cancellationToken
+        ) =>
+        {
+            var userDto = await mediator.Send(command, cancellationToken);
+
+            var token = jsonWebTokenService.Create(new Dictionary<string, object>
+            {
+                ["sub"] =  userDto.Id,
+                ["role"] = UserRole.Teacher
+            });
+            
+            return Results.Ok(new
+            {
+                User = userDto,
+                AccessToken = token
+            });
+        });
+        
+        endpoints.MapPost("/sign-in",async (
+            [FromBody] CheckTeacherPasswordQuery query,
+            IMediator mediator, 
+            JsonWebTokenService jsonWebTokenService,
+            CancellationToken cancellationToken
+        ) =>
+        {
+            var userDto = await mediator.Send(query, cancellationToken);
+
+            if (userDto is null)
+            {
+                return Results.Unauthorized();
+            }
+            
+            var token = jsonWebTokenService.Create(new Dictionary<string, object>
+            {
+                ["sub"] =  userDto.Id,
+                ["role"] = UserRole.Teacher
+            });
+            
+            return Results.Ok(new
+            {
+                User = userDto,
+                AccessToken = token
+            });
+        });
+        
         endpoints.MapPost("/me/avatar", async (
                 [FromForm] IFormFile avatar,
                 IMediator mediator,
@@ -25,7 +78,7 @@ public static class TeachersRouter
                     return Results.Forbid();
                 }
 
-                var userId = Guid.Parse(userIdString);
+                var teacherId = Guid.Parse(userIdString);
 
                 await using var fileStream = avatar.OpenReadStream();
 
@@ -35,9 +88,9 @@ public static class TeachersRouter
                     ContentType = avatar.ContentType
                 };
 
-                var command = new UploadStudentAvatarCommand
+                var command = new UploadTeacherAvatarCommand
                 {
-                    StudentId = userId,
+                    TeacherId = teacherId,
                     Avatar = fileDto
                 };
 

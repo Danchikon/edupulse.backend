@@ -1,6 +1,7 @@
 using System.Reflection;
 using EduPulse.Application.Common.Mediator;
 using EduPulse.Application.Dtos;
+using EduPulse.Application.Mediator.Commands.Students;
 using EduPulse.Application.Mediator.Commands.Tests;
 using EduPulse.Application.Mediator.Commands.Users;
 using FastExpressionCompiler;

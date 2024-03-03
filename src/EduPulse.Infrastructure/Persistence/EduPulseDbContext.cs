@@ -11,6 +11,7 @@ namespace EduPulse.Infrastructure.Persistence;
 
 public class EduPulseDbContext : DbContext
 {
+    public required DbSet<TeacherEntity> Teachers { get; init; }
     public required DbSet<StudentEntity> Students { get; init; }
     public required DbSet<StudentEntity> Institutes { get; init; }
     public required DbSet<TestEntity> Tests { get; init; }
@@ -24,7 +25,6 @@ public class EduPulseDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasPostgresEnum<UserRole>();
         modelBuilder.HasPostgresEnum<TestStatus>();
         
         modelBuilder

@@ -24,6 +24,7 @@ public class CreateGroupCommandHandler: CommandHandlerBase<CreateGroupCommand, G
         {
             Id = groupId,
             Title = command.Title,
+            InstituteId = command.InstituteId,
             CreatedAt = createdAt
         };
 

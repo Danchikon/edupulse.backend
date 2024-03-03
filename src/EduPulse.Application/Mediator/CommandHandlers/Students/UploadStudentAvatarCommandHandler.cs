@@ -1,5 +1,6 @@
 using EduPulse.Application.Abstractions;
 using EduPulse.Application.Common.Mediator;
+using EduPulse.Application.Mediator.Commands.Students;
 using EduPulse.Application.Mediator.Commands.Users;
 using EduPulse.Domain.Common;
 using EduPulse.Domain.Entities;

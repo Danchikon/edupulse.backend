@@ -8,29 +8,29 @@ using EduPulse.Domain.Entities;
 
 namespace EduPulse.Application.Mediator.CommandHandlers.Students;
 
-public class CreateStudentCommandHandler : CommandHandlerBase<CreateStudentCommand, StudentDto>
+public class CreateTeacherCommandHandler : CommandHandlerBase<CreateTeacherCommand, TeacherDto>
 {
-    private readonly IRepository<StudentEntity> _studentsRepository;
+    private readonly IRepository<TeacherEntity> _teachersRepository;
     private readonly IPasswordHasher _passwordHasher;
 
-    public CreateStudentCommandHandler(
-        IRepository<StudentEntity> studentsRepository,
+    public CreateTeacherCommandHandler(
+        IRepository<TeacherEntity> teachersRepository,
         IPasswordHasher passwordHasher
         )
     {
-        _studentsRepository = studentsRepository;
+        _teachersRepository = teachersRepository;
         _passwordHasher = passwordHasher;
     }
 
-    public override async Task<StudentDto> Handle(CreateStudentCommand command, CancellationToken cancellationToken)
+    public override async Task<TeacherDto> Handle(CreateTeacherCommand command, CancellationToken cancellationToken)
     {
-        var anyStudent = await _studentsRepository.AnyAsync(student => student.Email == command.Email, cancellationToken);
+        var anyTeacher = await _teachersRepository.AnyAsync(teacher => teacher.Email == command.Email, cancellationToken);
 
-        if (anyStudent)
+        if ( anyTeacher)
         {
             throw new BusinessException
             {
-                ErrorCode = ErrorCode.StudentWithSameEmailAlreadyExist,
+                ErrorCode = ErrorCode.TeacherWithSameEmailAlreadyExist,
                 ErrorKind = ErrorKind.InvalidOperation
             };
         }
@@ -40,20 +40,17 @@ public class CreateStudentCommandHandler : CommandHandlerBase<CreateStudentComma
 
         var passwordHash = _passwordHasher.Hash(command.Password);
         
-        var studentEntity = new StudentEntity
+        var studentEntity = new TeacherEntity
         {
             Id = studentId,
-            GroupId = command.GroupId,
-            PhoneNumber = command.PhoneNumber,
             Email = command.Email,
             FullName = command.FullName,
-            Age = command.Age,
             PasswordHash = passwordHash,
             CreatedAt = createdAt
         };
 
-        var studentDto = await _studentsRepository.AddAsync<StudentDto>(studentEntity, cancellationToken);
+        var teacherDto = await _teachersRepository.AddAsync<TeacherDto>(studentEntity, cancellationToken);
 
-        return studentDto;
+        return teacherDto;
     }
 }

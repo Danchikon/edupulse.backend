@@ -37,7 +37,6 @@ public static class Infrastructure
         
         services.AddPostgresDataSource(dataSourceBuilderConfigurator =>
         {
-            dataSourceBuilderConfigurator.MapEnum<UserRole>();
             dataSourceBuilderConfigurator.MapEnum<TestStatus>();
         });
         
@@ -59,6 +58,7 @@ public static class Infrastructure
     {
         services.AddScoped<IRepository<GroupEntity>, EfRepository<GroupEntity, TDbContext>>();
         services.AddScoped<IRepository<StudentEntity>,  EfRepository<StudentEntity, TDbContext>>();
+        services.AddScoped<IRepository<TeacherEntity>,  EfRepository<TeacherEntity, TDbContext>>();
         services.AddScoped<IRepository<TestEntity>, EfRepository<TestEntity, TDbContext>>();
         services.AddScoped<IRepository<SubjectEntity>,  EfRepository<SubjectEntity, TDbContext>>();
         

@@ -25,6 +25,23 @@ public class Query
         return dbContext.Students.ProjectToType<StudentDto>();
     }
     
+    [UseOffsetPaging]
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<TeacherDto> GetPagedTeachers([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.Teachers.ProjectToType<TeacherDto>();
+    }
+    
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<TeacherDto> GetTeachers([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.Teachers.ProjectToType<TeacherDto>();
+    }
+    
     [UseProjection]
     [UseFiltering]
     [UseSorting]

@@ -4,8 +4,7 @@ public enum ErrorCode
 {
     Unknown,
     NotFound,
-    UserNotFound,
-    UserWithSameEmailAlreadyExist,
+    StudentWithSameEmailAlreadyExist,
     InvalidPassword,
-    FavoriteAlreadyExist
+    TeacherWithSameEmailAlreadyExist,
 }

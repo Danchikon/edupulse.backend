@@ -17,7 +17,7 @@ public class Mutation
         return await mediator.Send(command, cancellationToken);
     } 
     
-    public async Task<bool> CreateUsersAsync(
+    public async Task<bool> CreateStudentsAsync(
         CreateStudentCommand[] commands, 
         [Service] IMediator mediator,
         CancellationToken cancellationToken
@@ -28,8 +28,17 @@ public class Mutation
         return true;
     } 
     
-    public async Task<StudentDto> UpdateUserAsync(
+    public async Task<StudentDto> UpdateStudentAsync(
         UpdateStudentCommand command, 
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken
+    )
+    {
+        return await mediator.Send(command, cancellationToken);
+    } 
+    
+    public async Task<TeacherDto> UpdateTeacherAsync(
+        UpdateTeacherCommand command, 
         [Service] IMediator mediator,
         CancellationToken cancellationToken
     )
