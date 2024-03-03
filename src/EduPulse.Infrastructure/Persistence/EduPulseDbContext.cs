@@ -38,6 +38,20 @@ public class EduPulseDbContext : DbContext
             .HasColumnType("jsonb");
 
         modelBuilder
+            .Entity<TeacherEntity>()
+            .HasData(new TeacherEntity[]
+            {
+                new ()
+                {
+                    Id = Guid.Parse("af41f834-c0f9-46be-89bf-51708b4adec9"),
+                    FullName = "Daniel Hrovinsky",
+                    CreatedAt = DateTimeOffset.UtcNow,
+                    Email = "daniel.hrovinsky@gmail.com",
+                    PasswordHash = "thj3yNIF3ZKC1UziLTuSh7CsSUTT/yR1nvu83Fx9oek="
+                }
+            });
+
+        modelBuilder
             .Entity<InstituteEntity>()
             .HasData(new InstituteEntity[]
             {

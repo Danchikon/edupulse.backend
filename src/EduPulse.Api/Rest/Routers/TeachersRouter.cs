@@ -51,7 +51,7 @@ public static class TeachersRouter
             
             return Results.Ok(new
             {
-                User = teacherDto,
+                Teacher = teacherDto,
                 AccessToken = token
             });
         });
@@ -63,22 +63,22 @@ public static class TeachersRouter
             CancellationToken cancellationToken
         ) =>
         {
-            var userDto = await mediator.Send(query, cancellationToken);
+            var teacherDto = await mediator.Send(query, cancellationToken);
 
-            if (userDto is null)
+            if (teacherDto is null)
             {
                 return Results.Unauthorized();
             }
             
             var token = jsonWebTokenService.Create(new Dictionary<string, object>
             {
-                ["sub"] =  userDto.Id,
+                ["sub"] =  teacherDto.Id,
                 ["role"] = UserRole.Teacher.ToString()
             });
             
             return Results.Ok(new
             {
-                User = userDto,
+                Teacher = teacherDto,
                 AccessToken = token
             });
         });
@@ -90,14 +90,14 @@ public static class TeachersRouter
                 CancellationToken cancellationToken
             ) =>
             {
-                var userIdString = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var teacherIdString = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                if (userIdString is null)
+                if (teacherIdString is null)
                 {
                     return Results.Forbid();
                 }
 
-                var teacherId = Guid.Parse(userIdString);
+                var teacherId = Guid.Parse(teacherIdString);
 
                 await using var fileStream = avatar.OpenReadStream();
 

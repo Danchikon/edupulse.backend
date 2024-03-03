@@ -40,22 +40,6 @@ public class Mutation
         return await mediator.Send(command, cancellationToken);
     } 
     
-    public async Task<bool> SendAsync(
-        [Service] IEmailSender emailSender,
-        CancellationToken cancellationToken
-    )
-    {
-        await emailSender.SendEmailAsync(
-            "example@example.com", 
-            "daniel.hrovinsky@gmail.com", 
-            "sub", 
-            "bim",
-            cancellationToken
-            );
-        
-        return true;
-    } 
-    
     public async Task<TestDto> CreateTestAsync(
         CreateTestCommand command, 
         [Service] IMediator mediator,

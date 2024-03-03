@@ -37,7 +37,7 @@ public static class StudentsRouter
             
             return Results.Ok(new
             {
-                User = studentDto,
+                Student = studentDto,
                 AccessToken = token
             });
         });
