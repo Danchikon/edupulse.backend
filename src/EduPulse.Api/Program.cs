@@ -91,4 +91,8 @@ apiGroup
     .MapGroup("teachers")
     .MapTeacherRoutes();
 
+apiGroup
+    .MapGroup("admins")
+    .MapTeacherRoutes();
+
 app.Run();
