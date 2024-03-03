@@ -60,7 +60,8 @@ public class CreateTestCommandHandler : CommandHandlerBase<CreateTestCommand, Te
         
         var testDto = await _testsRepository.AddAsync<TestDto>(testEntity, cancellationToken);
 
-        await _testScheduler.ScheduleAsync(testEntity, cancellationToken);
+        await _testScheduler.ScheduleOpenAsync(testEntity.Id, testEntity.OpensAt, cancellationToken);
+        await _testScheduler.ScheduleCloseAsync(testEntity.Id, testEntity.ClosesAt, cancellationToken);
 
         return testDto;
     }

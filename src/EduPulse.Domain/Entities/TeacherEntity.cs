@@ -9,6 +9,7 @@ public class TeacherEntity
     public required string Email { get; set; }
     public required string PasswordHash { get; set; }
     public Uri? Avatar { get; set; }
-    public GroupEntity[] Groups { get; set; } = Array.Empty<GroupEntity>();
+    public List<SubjectEntity> Subjects { get; init; } = new();
+    public List<GroupEntity> Groups { get; init; } = new();
     public DateTimeOffset CreatedAt { get; init; }
 }

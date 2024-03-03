@@ -15,11 +15,10 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
-                .Annotation("Npgsql:Enum:test_status", "scheduled,opened,closed")
-                .Annotation("Npgsql:Enum:user_role", "teacher,student,admin");
+                .Annotation("Npgsql:Enum:test_status", "scheduled,opened,closed");
 
             migrationBuilder.CreateTable(
-                name: "institute_entity",
+                name: "institutes",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -28,7 +27,7 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_institute_entity", x => x.id);
+                    table.PrimaryKey("pk_institutes", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,7 +45,7 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "teacher_entity",
+                name: "teachers",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -58,7 +57,7 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_teacher_entity", x => x.id);
+                    table.PrimaryKey("pk_teachers", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,9 +90,33 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("pk_groups", x => x.id);
                     table.ForeignKey(
-                        name: "fk_groups_institute_entity_institute_id",
+                        name: "fk_groups_institutes_institute_id",
                         column: x => x.institute_id,
-                        principalTable: "institute_entity",
+                        principalTable: "institutes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "teacher_subjects",
+                columns: table => new
+                {
+                    subject_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    teacher_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_teacher_subjects", x => new { x.subject_id, x.teacher_id });
+                    table.ForeignKey(
+                        name: "fk_teacher_subjects_subjects_subject_id",
+                        column: x => x.subject_id,
+                        principalTable: "subjects",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_teacher_subjects_teachers_teacher_id",
+                        column: x => x.teacher_id,
+                        principalTable: "teachers",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -142,31 +165,7 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "group_entity_teacher_entity",
-                columns: table => new
-                {
-                    groups_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    teachers_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_group_entity_teacher_entity", x => new { x.groups_id, x.teachers_id });
-                    table.ForeignKey(
-                        name: "fk_group_entity_teacher_entity_groups_groups_id",
-                        column: x => x.groups_id,
-                        principalTable: "groups",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_group_entity_teacher_entity_teacher_entity_teachers_id",
-                        column: x => x.teachers_id,
-                        principalTable: "teacher_entity",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "student_entity",
+                name: "students",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -177,23 +176,48 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                     password_hash = table.Column<string>(type: "text", nullable: false),
                     avatar = table.Column<string>(type: "text", nullable: true),
                     group_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    subject_entity_id = table.Column<Guid>(type: "uuid", nullable: true)
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_student_entity", x => x.id);
+                    table.PrimaryKey("pk_students", x => x.id);
                     table.ForeignKey(
-                        name: "fk_student_entity_groups_group_id",
+                        name: "fk_students_groups_group_id",
                         column: x => x.group_id,
                         principalTable: "groups",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "teacher_groups",
+                columns: table => new
+                {
+                    teacher_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    groups_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    group_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_teacher_groups", x => new { x.groups_id, x.teacher_id });
                     table.ForeignKey(
-                        name: "fk_student_entity_subjects_subject_entity_id",
-                        column: x => x.subject_entity_id,
+                        name: "fk_teacher_groups_groups_groups_id",
+                        column: x => x.groups_id,
+                        principalTable: "groups",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_teacher_groups_subjects_group_id",
+                        column: x => x.group_id,
                         principalTable: "subjects",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_teacher_groups_teachers_teacher_id",
+                        column: x => x.teacher_id,
+                        principalTable: "teachers",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,26 +239,26 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "institute_entity",
+                table: "institutes",
                 columns: new[] { "id", "code", "title" },
                 values: new object[,]
                 {
-                    { new Guid("059d4814-e8f2-4c98-ac66-6b21ce3407e6"), "ІГДГ", "Геодезії інститут" },
-                    { new Guid("1a49ef55-9824-40df-927c-b2f2f96d56bc"), "ІГСН", "Гуманітарних та соціальних наук інститут" },
-                    { new Guid("39d911b9-970a-4a20-9d42-74ecdef1c1d4"), "ІХХТ", "Хімії та хімічних технологій інститут" },
-                    { new Guid("43165619-9640-48b5-9f3d-476bd64d7c1d"), "ІКТА", "Комп'ютерних технологій, автоматики та метрології інститут" },
-                    { new Guid("46dae0eb-5f4a-4718-840c-728014a37353"), "КНІ", "Комп'ютерних наук та інформаційних технологій" },
-                    { new Guid("52f20b63-9e43-4f67-8eb6-f4ef66fb871a"), "ІППО", "Права, психології та інноваційної освіти інститут" },
-                    { new Guid("5993931a-076b-4875-9b3a-7a4ae7f70a6d"), "ІАРД", "Архітектури та дизайну інститут" },
-                    { new Guid("60a3ba75-76af-469a-b2fb-e5d49d6ba361"), "ІСТР", "Сталого розвитку і ім. В.Чорновола інститут" },
-                    { new Guid("6a2495fe-d488-4ee7-bc20-c5ea3ef44a62"), "ІТРЕ", "Телекомунікацій, радіоелектроніки та електронної техніки інститут" },
-                    { new Guid("72e38a8c-08ee-4f33-95e6-8a260b32d969"), "ІППТ", "Просторового планування та перспективних технологій інститут" },
-                    { new Guid("7ba9ee63-aaf3-437c-82c7-a0196997ed22"), "ІНЕМ", "Економіки і менеджменту інститут" },
-                    { new Guid("9c220bb9-b849-4345-b899-f8cb0eb5dc95"), "ІДА", "Адміністрування, державного управління та професійного розвитку інститут" },
-                    { new Guid("a1b14a4b-ac2f-4db0-9623-202f4e3ebc1b"), "ІЕСК", "Енергетики та систем керування інститут" },
-                    { new Guid("a72e9338-54e8-41f4-b54b-3c09fdfb2e05"), "ІБІС", "Будівництва та інженерних систем інститут" },
-                    { new Guid("c1fbfd2d-7118-4c8d-a95d-518001a217b7"), "ІМФН", "Прикладної математики та фундаментальних наук інститут" },
-                    { new Guid("fb2f72f6-7a78-4f30-9560-3705dede7180"), "ІМІТ", "Механічної інженерії та транспорту інститут" }
+                    { new Guid("001e781e-deae-479d-ac8a-589fb3144cde"), "КНІ", "Комп'ютерних наук та інформаційних технологій" },
+                    { new Guid("0fe6ed77-682c-4d67-affc-19d8998fbc3b"), "ІКТА", "Комп'ютерних технологій, автоматики та метрології інститут" },
+                    { new Guid("1b9eec26-df7d-497f-b421-436173c116ed"), "ІНЕМ", "Економіки і менеджменту інститут" },
+                    { new Guid("234cbd67-3de3-4481-934a-bc02546575d7"), "ІГСН", "Гуманітарних та соціальних наук інститут" },
+                    { new Guid("28139249-e9d8-42c7-80d3-c92e239e41bc"), "ІГДГ", "Геодезії інститут" },
+                    { new Guid("3700d110-c1f2-40b1-b4c2-1d3633a6419e"), "ІАРД", "Архітектури та дизайну інститут" },
+                    { new Guid("40ce2ccb-e0da-4a8e-80a1-f2cf5d324739"), "ІППО", "Права, психології та інноваційної освіти інститут" },
+                    { new Guid("5735002f-87eb-4615-bc0b-e707307ac782"), "ІППТ", "Просторового планування та перспективних технологій інститут" },
+                    { new Guid("5b13f774-3097-47e2-bbec-fb97bda64995"), "ІХХТ", "Хімії та хімічних технологій інститут" },
+                    { new Guid("5be2eedb-52f5-49ff-852f-7af9b64116f1"), "ІДА", "Адміністрування, державного управління та професійного розвитку інститут" },
+                    { new Guid("817dce9c-ff78-477b-8cea-4d2d7fa7fff4"), "ІТРЕ", "Телекомунікацій, радіоелектроніки та електронної техніки інститут" },
+                    { new Guid("8d26d7a0-9e42-4e49-99a4-cd9fd0f6ca45"), "ІМФН", "Прикладної математики та фундаментальних наук інститут" },
+                    { new Guid("b1a1c978-62c9-4629-bb59-75a2c585ba4c"), "ІЕСК", "Енергетики та систем керування інститут" },
+                    { new Guid("b3441ade-2df3-47df-9015-c4d629339b9d"), "ІСТР", "Сталого розвитку і ім. В.Чорновола інститут" },
+                    { new Guid("d228800c-170d-4db8-b3a1-03771990b950"), "ІБІС", "Будівництва та інженерних систем інститут" },
+                    { new Guid("f0ab9474-cb0f-4361-84d9-1c7fdca0770c"), "ІМІТ", "Механічної інженерії та транспорту інститут" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -246,11 +270,6 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 name: "ix_group_entity_subject_entity_subjects_id",
                 table: "group_entity_subject_entity",
                 column: "subjects_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_group_entity_teacher_entity_teachers_id",
-                table: "group_entity_teacher_entity",
-                column: "teachers_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_groups_institute_id",
@@ -269,26 +288,36 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 column: "test_entity_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_student_entity_email",
-                table: "student_entity",
+                name: "ix_students_email",
+                table: "students",
                 column: "email")
                 .Annotation("Npgsql:IndexMethod", "btree");
 
             migrationBuilder.CreateIndex(
-                name: "ix_student_entity_full_name",
-                table: "student_entity",
+                name: "ix_students_full_name",
+                table: "students",
                 column: "full_name")
                 .Annotation("Npgsql:IndexMethod", "btree");
 
             migrationBuilder.CreateIndex(
-                name: "ix_student_entity_group_id",
-                table: "student_entity",
+                name: "ix_students_group_id",
+                table: "students",
                 column: "group_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_student_entity_subject_entity_id",
-                table: "student_entity",
-                column: "subject_entity_id");
+                name: "ix_teacher_groups_group_id",
+                table: "teacher_groups",
+                column: "group_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_teacher_groups_teacher_id",
+                table: "teacher_groups",
+                column: "teacher_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_teacher_subjects_teacher_id",
+                table: "teacher_subjects",
+                column: "teacher_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_tests_title",
@@ -307,16 +336,16 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 name: "group_entity_subject_entity");
 
             migrationBuilder.DropTable(
-                name: "group_entity_teacher_entity");
+                name: "students");
 
             migrationBuilder.DropTable(
-                name: "student_entity");
+                name: "teacher_groups");
+
+            migrationBuilder.DropTable(
+                name: "teacher_subjects");
 
             migrationBuilder.DropTable(
                 name: "question_entity");
-
-            migrationBuilder.DropTable(
-                name: "teacher_entity");
 
             migrationBuilder.DropTable(
                 name: "groups");
@@ -325,10 +354,13 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 name: "subjects");
 
             migrationBuilder.DropTable(
+                name: "teachers");
+
+            migrationBuilder.DropTable(
                 name: "tests");
 
             migrationBuilder.DropTable(
-                name: "institute_entity");
+                name: "institutes");
         }
     }
 }

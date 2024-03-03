@@ -7,8 +7,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EduPulse.Infrastructure.Implementations;
 
-public class CentrifugoOutboxEventsPublisher<TDbContext>(TDbContext dbContext) : IEventsPublisher where TDbContext: DbContext
+public class CentrifugoOutboxEventsPublisher<TDbContext> : IEventsPublisher where TDbContext: DbContext
 {
+    private readonly TDbContext _dbContext;
+
+    public CentrifugoOutboxEventsPublisher(TDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
     public async Task PublishAsync<TData>(EventDto<TData> @event, CancellationToken cancellationToken = default)
     {
         var data = JsonSerializer.SerializeToNode(@event.Data);
@@ -28,10 +35,10 @@ public class CentrifugoOutboxEventsPublisher<TDbContext>(TDbContext dbContext) :
             CreatedAt = DateTimeOffset.UtcNow
         };
 
-        await dbContext
+        await _dbContext
             .Set<CentrifugoOutboxEntity>()
             .AddAsync(outboxEntity, cancellationToken);
         
-        await dbContext.SaveChangesAsync(cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }

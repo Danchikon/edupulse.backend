@@ -101,104 +101,104 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                         .HasColumnName("title");
 
                     b.HasKey("Id")
-                        .HasName("pk_institute_entity");
+                        .HasName("pk_institutes");
 
-                    b.ToTable("institute_entity", (string)null);
+                    b.ToTable("institutes", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("94bc1a39-9a8a-4af8-b683-4eb50fa2a29c"),
+                            Id = new Guid("5be2eedb-52f5-49ff-852f-7af9b64116f1"),
                             Code = "ІДА",
                             Title = "Адміністрування, державного управління та професійного розвитку інститут"
                         },
                         new
                         {
-                            Id = new Guid("25ec0c5a-83b0-445b-9d74-be8dc9d09be3"),
+                            Id = new Guid("3700d110-c1f2-40b1-b4c2-1d3633a6419e"),
                             Code = "ІАРД",
                             Title = "Архітектури та дизайну інститут"
                         },
                         new
                         {
-                            Id = new Guid("19fba6ad-4004-4473-8eb0-a732ec74f37a"),
+                            Id = new Guid("d228800c-170d-4db8-b3a1-03771990b950"),
                             Code = "ІБІС",
                             Title = "Будівництва та інженерних систем інститут"
                         },
                         new
                         {
-                            Id = new Guid("6a59cc1f-62b8-412e-a81e-99b803680faa"),
+                            Id = new Guid("28139249-e9d8-42c7-80d3-c92e239e41bc"),
                             Code = "ІГДГ",
                             Title = "Геодезії інститут"
                         },
                         new
                         {
-                            Id = new Guid("c003fabc-36d6-41bc-a51d-dc757ab3fd31"),
+                            Id = new Guid("234cbd67-3de3-4481-934a-bc02546575d7"),
                             Code = "ІГСН",
                             Title = "Гуманітарних та соціальних наук інститут"
                         },
                         new
                         {
-                            Id = new Guid("a4836b32-047c-4458-88ab-0ea487fb6133"),
+                            Id = new Guid("1b9eec26-df7d-497f-b421-436173c116ed"),
                             Code = "ІНЕМ",
                             Title = "Економіки і менеджменту інститут"
                         },
                         new
                         {
-                            Id = new Guid("11b429a9-0c4e-439a-8e1f-29050711b834"),
+                            Id = new Guid("b1a1c978-62c9-4629-bb59-75a2c585ba4c"),
                             Code = "ІЕСК",
                             Title = "Енергетики та систем керування інститут"
                         },
                         new
                         {
-                            Id = new Guid("21d23eeb-211c-448d-a579-e3d9c27c3993"),
+                            Id = new Guid("001e781e-deae-479d-ac8a-589fb3144cde"),
                             Code = "КНІ",
                             Title = "Комп'ютерних наук та інформаційних технологій"
                         },
                         new
                         {
-                            Id = new Guid("3bfb8b21-5d35-4e79-933d-3aa43bd60f84"),
+                            Id = new Guid("0fe6ed77-682c-4d67-affc-19d8998fbc3b"),
                             Code = "ІКТА",
                             Title = "Комп'ютерних технологій, автоматики та метрології інститут"
                         },
                         new
                         {
-                            Id = new Guid("94f10cc4-14de-4f78-82f0-0bac3b132fb7"),
+                            Id = new Guid("f0ab9474-cb0f-4361-84d9-1c7fdca0770c"),
                             Code = "ІМІТ",
                             Title = "Механічної інженерії та транспорту інститут"
                         },
                         new
                         {
-                            Id = new Guid("486e68b1-f5bd-4883-a554-302875122f23"),
+                            Id = new Guid("40ce2ccb-e0da-4a8e-80a1-f2cf5d324739"),
                             Code = "ІППО",
                             Title = "Права, психології та інноваційної освіти інститут"
                         },
                         new
                         {
-                            Id = new Guid("7a8b43b9-ef9f-4f76-a9a0-98fbb01f8081"),
+                            Id = new Guid("8d26d7a0-9e42-4e49-99a4-cd9fd0f6ca45"),
                             Code = "ІМФН",
                             Title = "Прикладної математики та фундаментальних наук інститут"
                         },
                         new
                         {
-                            Id = new Guid("18145af2-be3c-4aa5-bd4f-5a03a81c0a0d"),
+                            Id = new Guid("5735002f-87eb-4615-bc0b-e707307ac782"),
                             Code = "ІППТ",
                             Title = "Просторового планування та перспективних технологій інститут"
                         },
                         new
                         {
-                            Id = new Guid("94c45bb7-6185-4cb2-a487-ee183e42d947"),
+                            Id = new Guid("b3441ade-2df3-47df-9015-c4d629339b9d"),
                             Code = "ІСТР",
                             Title = "Сталого розвитку і ім. В.Чорновола інститут"
                         },
                         new
                         {
-                            Id = new Guid("7da3338c-b618-4ad0-919c-b8699a8c0c49"),
+                            Id = new Guid("817dce9c-ff78-477b-8cea-4d2d7fa7fff4"),
                             Code = "ІТРЕ",
                             Title = "Телекомунікацій, радіоелектроніки та електронної техніки інститут"
                         },
                         new
                         {
-                            Id = new Guid("fd644263-a201-4577-ab89-7ae92d4ad73e"),
+                            Id = new Guid("5b13f774-3097-47e2-bbec-fb97bda64995"),
                             Code = "ІХХТ",
                             Title = "Хімії та хімічних технологій інститут"
                         });
@@ -276,30 +276,23 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                         .HasColumnType("text")
                         .HasColumnName("phone_number");
 
-                    b.Property<Guid?>("SubjectEntityId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("subject_entity_id");
-
                     b.HasKey("Id")
-                        .HasName("pk_student_entity");
+                        .HasName("pk_students");
 
                     b.HasIndex("Email")
-                        .HasDatabaseName("ix_student_entity_email");
+                        .HasDatabaseName("ix_students_email");
 
                     NpgsqlIndexBuilderExtensions.HasMethod(b.HasIndex("Email"), "btree");
 
                     b.HasIndex("FullName")
-                        .HasDatabaseName("ix_student_entity_full_name");
+                        .HasDatabaseName("ix_students_full_name");
 
                     NpgsqlIndexBuilderExtensions.HasMethod(b.HasIndex("FullName"), "btree");
 
                     b.HasIndex("GroupId")
-                        .HasDatabaseName("ix_student_entity_group_id");
+                        .HasDatabaseName("ix_students_group_id");
 
-                    b.HasIndex("SubjectEntityId")
-                        .HasDatabaseName("ix_student_entity_subject_entity_id");
-
-                    b.ToTable("student_entity", (string)null);
+                    b.ToTable("students", (string)null);
                 });
 
             modelBuilder.Entity("EduPulse.Domain.Entities.SubjectEntity", b =>
@@ -363,6 +356,51 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                         .HasName("pk_teachers");
 
                     b.ToTable("teachers", (string)null);
+                });
+
+            modelBuilder.Entity("EduPulse.Domain.Entities.TeacherGroupEntity", b =>
+                {
+                    b.Property<Guid>("GroupsId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("groups_id");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("teacher_id");
+
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("group_id");
+
+                    b.HasKey("GroupsId", "TeacherId")
+                        .HasName("pk_teacher_groups");
+
+                    b.HasIndex("GroupId")
+                        .HasDatabaseName("ix_teacher_groups_group_id");
+
+                    b.HasIndex("TeacherId")
+                        .HasDatabaseName("ix_teacher_groups_teacher_id");
+
+                    b.ToTable("teacher_groups", (string)null);
+                });
+
+            modelBuilder.Entity("EduPulse.Domain.Entities.TeacherSubjectEntity", b =>
+                {
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("subject_id");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("teacher_id");
+
+                    b.HasKey("SubjectId", "TeacherId")
+                        .HasName("pk_teacher_subjects");
+
+                    b.HasIndex("TeacherId")
+                        .HasDatabaseName("ix_teacher_subjects_teacher_id");
+
+                    b.ToTable("teacher_subjects", (string)null);
                 });
 
             modelBuilder.Entity("EduPulse.Domain.Entities.TestEntity", b =>
@@ -464,25 +502,6 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                     b.ToTable("group_entity_subject_entity", (string)null);
                 });
 
-            modelBuilder.Entity("GroupEntityTeacherEntity", b =>
-                {
-                    b.Property<Guid>("GroupsId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("groups_id");
-
-                    b.Property<Guid>("TeachersId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("teachers_id");
-
-                    b.HasKey("GroupsId", "TeachersId")
-                        .HasName("pk_group_entity_teacher_entity");
-
-                    b.HasIndex("TeachersId")
-                        .HasDatabaseName("ix_group_entity_teacher_entity_teachers_id");
-
-                    b.ToTable("group_entity_teacher_entity", (string)null);
-                });
-
             modelBuilder.Entity("EduPulse.Domain.Entities.AnswerEntity", b =>
                 {
                     b.HasOne("EduPulse.Domain.Entities.QuestionEntity", null)
@@ -498,7 +517,7 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                         .HasForeignKey("InstituteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_groups_institute_entity_institute_id");
+                        .HasConstraintName("fk_groups_institutes_institute_id");
 
                     b.Navigation("Institute");
                 });
@@ -518,14 +537,58 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_student_entity_groups_group_id");
-
-                    b.HasOne("EduPulse.Domain.Entities.SubjectEntity", null)
-                        .WithMany("Teachers")
-                        .HasForeignKey("SubjectEntityId")
-                        .HasConstraintName("fk_student_entity_subjects_subject_entity_id");
+                        .HasConstraintName("fk_students_groups_group_id");
 
                     b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("EduPulse.Domain.Entities.TeacherGroupEntity", b =>
+                {
+                    b.HasOne("EduPulse.Domain.Entities.SubjectEntity", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_teacher_groups_subjects_group_id");
+
+                    b.HasOne("EduPulse.Domain.Entities.GroupEntity", null)
+                        .WithMany()
+                        .HasForeignKey("GroupsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_teacher_groups_groups_groups_id");
+
+                    b.HasOne("EduPulse.Domain.Entities.TeacherEntity", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_teacher_groups_teachers_teacher_id");
+
+                    b.Navigation("Group");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("EduPulse.Domain.Entities.TeacherSubjectEntity", b =>
+                {
+                    b.HasOne("EduPulse.Domain.Entities.SubjectEntity", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_teacher_subjects_subjects_subject_id");
+
+                    b.HasOne("EduPulse.Domain.Entities.TeacherEntity", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_teacher_subjects_teachers_teacher_id");
+
+                    b.Navigation("Subject");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("GroupEntitySubjectEntity", b =>
@@ -545,23 +608,6 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                         .HasConstraintName("fk_group_entity_subject_entity_subjects_subjects_id");
                 });
 
-            modelBuilder.Entity("GroupEntityTeacherEntity", b =>
-                {
-                    b.HasOne("EduPulse.Domain.Entities.GroupEntity", null)
-                        .WithMany()
-                        .HasForeignKey("GroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_group_entity_teacher_entity_groups_groups_id");
-
-                    b.HasOne("EduPulse.Domain.Entities.TeacherEntity", null)
-                        .WithMany()
-                        .HasForeignKey("TeachersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_group_entity_teacher_entity_teachers_teachers_id");
-                });
-
             modelBuilder.Entity("EduPulse.Domain.Entities.GroupEntity", b =>
                 {
                     b.Navigation("Students");
@@ -570,11 +616,6 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("EduPulse.Domain.Entities.QuestionEntity", b =>
                 {
                     b.Navigation("Answers");
-                });
-
-            modelBuilder.Entity("EduPulse.Domain.Entities.SubjectEntity", b =>
-                {
-                    b.Navigation("Teachers");
                 });
 
             modelBuilder.Entity("EduPulse.Domain.Entities.TestEntity", b =>

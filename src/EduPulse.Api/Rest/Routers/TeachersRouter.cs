@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using EduPulse.Application.Dtos;
 using EduPulse.Application.Mediator.Commands.Students;
+using EduPulse.Application.Mediator.Commands.Teachers;
 using EduPulse.Application.Mediator.Commands.Users;
 using EduPulse.Application.Mediator.Queries.Students;
 using EduPulse.Application.Mediator.Queries.Teachers;
@@ -22,17 +23,35 @@ public static class TeachersRouter
             CancellationToken cancellationToken
         ) =>
         {
-            var userDto = await mediator.Send(command, cancellationToken);
+            var teacherDto = await mediator.Send(command, cancellationToken);
+            
+            foreach (var groupId in command.GroupIds)
+            {
+                await mediator.Send(new AddTeacherToGroupCommand
+                {
+                    GroupId = groupId,
+                    TeacherId = teacherDto.Id
+                }, cancellationToken);
+            }
+            
+            foreach (var subjectId in command.SubjectIds)
+            {
+                await mediator.Send(new AddTeacherToSubjectCommand
+                {
+                    SubjectId = subjectId,
+                    TeacherId = teacherDto.Id
+                }, cancellationToken);
+            }
 
             var token = jsonWebTokenService.Create(new Dictionary<string, object>
             {
-                ["sub"] =  userDto.Id,
+                ["sub"] =  teacherDto.Id,
                 ["role"] = UserRole.Teacher
             });
             
             return Results.Ok(new
             {
-                User = userDto,
+                User = teacherDto,
                 AccessToken = token
             });
         });

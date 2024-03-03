@@ -6,5 +6,5 @@ public record GroupDto
     public required string Title { get; init; }
     public required InstituteDto Institute { get; init; }
     public DateTimeOffset CreatedAt { get; init; }
-    public StudentDto[] Users { get; init; } = Array.Empty<StudentDto>();
+    public StudentDto[] Students { get; init; } = Array.Empty<StudentDto>();
 }

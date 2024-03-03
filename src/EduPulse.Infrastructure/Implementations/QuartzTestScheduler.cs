@@ -14,38 +14,53 @@ public class QuartzTestScheduler : ITestScheduler
         _schedulerFactory = schedulerFactory;
     }
 
-    public async Task ScheduleAsync(TestEntity test, CancellationToken cancellationToken = default)
+    public async Task ScheduleOpenAsync(
+        Guid testId,
+        DateTimeOffset timestamp, 
+        CancellationToken cancellationToken = default
+    )
     {
         var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
         
-        var openJobDetail = JobBuilder
+        var jobDetail = JobBuilder
             .Create<OpenTestJob>()
+            .WithIdentity(Guid.NewGuid().ToString())
             .SetJobData(new JobDataMap
             {
-                ["testId"] = test.Id.ToString(),
+                ["testId"] = testId.ToString(),
             })
             .Build();
 
-        var openTrigger = TriggerBuilder
+        var trigger = TriggerBuilder
             .Create()
-            .StartAt(test.OpensAt)
+            .StartAt(timestamp)
             .Build();
         
-        var closeJobDetail = JobBuilder
+        await scheduler.ScheduleJob(jobDetail, trigger, cancellationToken);
+    }
+    
+    public async Task ScheduleCloseAsync(
+        Guid testId,
+        DateTimeOffset timestamp, 
+        CancellationToken cancellationToken = default
+    )
+    {
+        var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
+        
+        var jobDetail = JobBuilder
             .Create<CloseTestJob>()
+            .WithIdentity(Guid.NewGuid().ToString())
             .SetJobData(new JobDataMap
             {
-                ["testId"] = test.Id.ToString(),
+                ["testId"] = testId.ToString(),
             })
             .Build();
 
-        var closeTrigger = TriggerBuilder
+        var trigger = TriggerBuilder
             .Create()
-            .StartAt(test.ClosesAt)
+            .StartAt(timestamp)
             .Build();
         
-
-        await scheduler.ScheduleJob(openJobDetail, openTrigger, cancellationToken);
-        await scheduler.ScheduleJob(closeJobDetail, closeTrigger, cancellationToken);
+        await scheduler.ScheduleJob(jobDetail, trigger, cancellationToken);
     }
 }

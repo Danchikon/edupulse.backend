@@ -1,5 +1,6 @@
 using EduPulse.Application.Dtos;
 using EduPulse.Application.Mediator.Commands.Groups;
+using EduPulse.Application.Mediator.Commands.Teachers;
 using EduPulse.Application.Mediator.Commands.Tests;
 using EduPulse.Application.Mediator.Commands.Users;
 using MediatR;
@@ -44,6 +45,28 @@ public class Mutation
     )
     {
         return await mediator.Send(command, cancellationToken);
+    } 
+    
+    public async Task<bool> AddTeacherToGroupAsync(
+        AddTeacherToGroupCommand command, 
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken
+    )
+    {
+        await mediator.Send(command, cancellationToken);
+
+        return true;
+    } 
+    
+    public async Task<bool> AddTeacherToSubjectAsync(
+        AddTeacherToSubjectCommand command, 
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken
+    )
+    {
+        await mediator.Send(command, cancellationToken);
+
+        return true;
     } 
     
     public async Task<GroupDto> CreateGroupAsync(

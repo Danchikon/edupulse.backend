@@ -19,8 +19,11 @@ public static class Application
         {
             mediatRServiceConfiguration.Lifetime = ServiceLifetime.Scoped;
             
-            mediatRServiceConfiguration.AddBehavior<TransactionalPipelineBehaviour<UploadStudentAvatarCommand, Uri>>();
+            mediatRServiceConfiguration.AddBehavior<TransactionalPipelineBehaviour<CloseTestCommand, TestDto>>();
+            mediatRServiceConfiguration.AddBehavior<TransactionalPipelineBehaviour<OpenTestCommand, TestDto>>();
             mediatRServiceConfiguration.AddBehavior<TransactionalPipelineBehaviour<CreateTestCommand, TestDto>>();
+            mediatRServiceConfiguration.AddBehavior<TransactionalPipelineBehaviour<UploadStudentAvatarCommand, Uri>>();
+            mediatRServiceConfiguration.AddBehavior<TransactionalPipelineBehaviour<UploadTeacherAvatarCommand, Uri>>();
             mediatRServiceConfiguration.AddOpenBehavior(typeof(LoggingPipelineBehaviour<,>));
             
             mediatRServiceConfiguration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());

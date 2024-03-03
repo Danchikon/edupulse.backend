@@ -13,7 +13,9 @@ public class EduPulseDbContext : DbContext
 {
     public required DbSet<TeacherEntity> Teachers { get; init; }
     public required DbSet<StudentEntity> Students { get; init; }
-    public required DbSet<StudentEntity> Institutes { get; init; }
+    public required DbSet<InstituteEntity> Institutes { get; init; }
+    public required DbSet<TeacherSubjectEntity> TeacherSubjects { get; init; }
+    public required DbSet<TeacherGroupEntity> TeacherGroups { get; init; }
     public required DbSet<TestEntity> Tests { get; init; }
     public required DbSet<GroupEntity> Groups { get; init; }
     public required DbSet<SubjectEntity> Subjects { get; init; }

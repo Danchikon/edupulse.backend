@@ -33,6 +33,7 @@ public static class Infrastructure
         services.AddPasswordHasher();
         services.AddJsonWebTokenService();
         services.AddSingleton<ITestScheduler, QuartzTestScheduler>();
+        services.AddScoped<IEventsPublisher, CentrifugoOutboxEventsPublisher<EduPulseDbContext>>();
         services.AddKeyedSingleton("tests", new SemaphoreSlim(1));
         
         services.AddPostgresDataSource(dataSourceBuilderConfigurator =>
@@ -61,6 +62,8 @@ public static class Infrastructure
         services.AddScoped<IRepository<TeacherEntity>,  EfRepository<TeacherEntity, TDbContext>>();
         services.AddScoped<IRepository<TestEntity>, EfRepository<TestEntity, TDbContext>>();
         services.AddScoped<IRepository<SubjectEntity>,  EfRepository<SubjectEntity, TDbContext>>();
+        services.AddScoped<IRepository<TeacherSubjectEntity>, EfRepository<TeacherSubjectEntity, TDbContext>>();
+        services.AddScoped<IRepository<TeacherGroupEntity>,  EfRepository<TeacherGroupEntity, TDbContext>>();
         
         return services;
     }

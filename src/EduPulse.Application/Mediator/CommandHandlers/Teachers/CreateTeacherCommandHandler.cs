@@ -1,6 +1,7 @@
 using EduPulse.Application.Abstractions;
 using EduPulse.Application.Common.Mediator;
 using EduPulse.Application.Dtos;
+using EduPulse.Application.Mediator.Commands.Teachers;
 using EduPulse.Application.Mediator.Commands.Users;
 using EduPulse.Domain.Common;
 using EduPulse.Domain.Common.Enums;
@@ -11,15 +12,21 @@ namespace EduPulse.Application.Mediator.CommandHandlers.Students;
 public class CreateTeacherCommandHandler : CommandHandlerBase<CreateTeacherCommand, TeacherDto>
 {
     private readonly IRepository<TeacherEntity> _teachersRepository;
+    private readonly IRepository<TeacherGroupEntity> _teacherGroupsRepository;
+    private readonly IRepository<TeacherSubjectEntity> _teacherSubjectsRepository;
     private readonly IPasswordHasher _passwordHasher;
 
     public CreateTeacherCommandHandler(
         IRepository<TeacherEntity> teachersRepository,
-        IPasswordHasher passwordHasher
+        IPasswordHasher passwordHasher, 
+        IRepository<TeacherGroupEntity> teacherGroupsRepository,
+        IRepository<TeacherSubjectEntity> teacherSubjectsRepository
         )
     {
         _teachersRepository = teachersRepository;
         _passwordHasher = passwordHasher;
+        _teacherGroupsRepository = teacherGroupsRepository;
+        _teacherSubjectsRepository = teacherSubjectsRepository;
     }
 
     public override async Task<TeacherDto> Handle(CreateTeacherCommand command, CancellationToken cancellationToken)
@@ -35,14 +42,14 @@ public class CreateTeacherCommandHandler : CommandHandlerBase<CreateTeacherComma
             };
         }
         
-        var studentId = Guid.NewGuid();
+        var teacherId = Guid.NewGuid();
         var createdAt = DateTimeOffset.UtcNow;
 
         var passwordHash = _passwordHasher.Hash(command.Password);
         
         var studentEntity = new TeacherEntity
         {
-            Id = studentId,
+            Id = teacherId,
             Email = command.Email,
             FullName = command.FullName,
             PasswordHash = passwordHash,
