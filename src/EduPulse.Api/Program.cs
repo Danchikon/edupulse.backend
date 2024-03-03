@@ -83,6 +83,12 @@ app.MapGraphQL();
 
 var apiGroup = app.MapGroup("api");
 
-apiGroup.MapUsersRoutes();
+apiGroup
+    .MapGroup("students")
+    .MapStudentsRoutes();
+
+apiGroup
+    .MapGroup("teachers")
+    .MapTeacherRoutes();
 
 app.Run();

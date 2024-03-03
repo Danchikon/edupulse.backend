@@ -1,4 +1,6 @@
 using System.Reflection;
+using System.Text;
+using Bogus;
 using EduPulse.Domain.Entities;
 using EduPulse.Domain.Enums;
 using EduPulse.Infrastructure.Entities;

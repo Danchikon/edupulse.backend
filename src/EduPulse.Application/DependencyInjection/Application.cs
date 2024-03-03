@@ -1,7 +1,6 @@
 using System.Reflection;
 using EduPulse.Application.Common.Mediator;
 using EduPulse.Application.Dtos;
-using EduPulse.Application.Mediator.CommandHandlers.Users;
 using EduPulse.Application.Mediator.Commands.Tests;
 using EduPulse.Application.Mediator.Commands.Users;
 using FastExpressionCompiler;
@@ -19,7 +18,7 @@ public static class Application
         {
             mediatRServiceConfiguration.Lifetime = ServiceLifetime.Scoped;
             
-            mediatRServiceConfiguration.AddBehavior<TransactionalPipelineBehaviour<UploadUserAvatarCommand, Uri>>();
+            mediatRServiceConfiguration.AddBehavior<TransactionalPipelineBehaviour<UploadStudentAvatarCommand, Uri>>();
             mediatRServiceConfiguration.AddBehavior<TransactionalPipelineBehaviour<CreateTestCommand, TestDto>>();
             mediatRServiceConfiguration.AddOpenBehavior(typeof(LoggingPipelineBehaviour<,>));
             

@@ -12,7 +12,7 @@ public class Query
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<StudentDto> GetPagedUsers([Service] EduPulseDbContext dbContext)
+    public IQueryable<StudentDto> GetPagedStudents([Service] EduPulseDbContext dbContext)
     {
         return dbContext.Students.ProjectToType<StudentDto>();
     }
@@ -20,9 +20,17 @@ public class Query
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<StudentDto> GetUsers([Service] EduPulseDbContext dbContext)
+    public IQueryable<StudentDto> GetStudents([Service] EduPulseDbContext dbContext)
     {
         return dbContext.Students.ProjectToType<StudentDto>();
+    }
+    
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<InstituteDto> GetInstitutes([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.Institutes.ProjectToType<InstituteDto>();
     }
     
     [UseOffsetPaging]

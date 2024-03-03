@@ -18,7 +18,7 @@ public class Mutation
     } 
     
     public async Task<bool> CreateUsersAsync(
-        CreateUserCommand[] commands, 
+        CreateStudentCommand[] commands, 
         [Service] IMediator mediator,
         CancellationToken cancellationToken
     )
@@ -29,7 +29,7 @@ public class Mutation
     } 
     
     public async Task<StudentDto> UpdateUserAsync(
-        UpdateUserCommand command, 
+        UpdateStudentCommand command, 
         [Service] IMediator mediator,
         CancellationToken cancellationToken
     )
