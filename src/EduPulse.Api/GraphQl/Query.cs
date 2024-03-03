@@ -12,6 +12,23 @@ public class Query
     [UseProjection]
     [UseFiltering]
     [UseSorting]
+    public IQueryable<UserAnswerDto> GetPagedUserAnswers([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.UserAnswers.ProjectToType<UserAnswerDto>();
+    }
+    
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<UserAnswerDto> GetUserAnswers([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.UserAnswers.ProjectToType<UserAnswerDto>();
+    }
+    
+    [UseOffsetPaging]
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
     public IQueryable<StudentDto> GetPagedStudents([Service] EduPulseDbContext dbContext)
     {
         return dbContext.Students.ProjectToType<StudentDto>();

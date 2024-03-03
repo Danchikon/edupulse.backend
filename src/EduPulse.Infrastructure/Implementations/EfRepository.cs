@@ -8,7 +8,7 @@ namespace EduPulse.Infrastructure.Implementations;
 
 public class EfRepository<TEntity, TDbContext> : IRepository<TEntity> where TEntity : class where TDbContext : DbContext
 {
-    private readonly TDbContext _dbContext;
+    protected readonly TDbContext DbContext;
     private readonly IMapper _mapper;
 
     public EfRepository(
@@ -16,25 +16,25 @@ public class EfRepository<TEntity, TDbContext> : IRepository<TEntity> where TEnt
         IMapper mapper
         )
     {
-        _dbContext = dbContext;
+        DbContext = dbContext;
         _mapper = mapper;
     }
 
-    public async Task<TEntity> AddAsync(
+    public virtual async Task<TEntity> AddAsync(
         TEntity entity, 
         CancellationToken cancellationToken = default
         )
     {
-        var entry = await _dbContext
+        var entry = await DbContext
             .Set<TEntity>()
             .AddAsync(entity, cancellationToken);
         
-        await _dbContext.SaveChangesAsync(cancellationToken);
+        await DbContext.SaveChangesAsync(cancellationToken);
 
         return entry.Entity;
     }
 
-    public async Task<TDto> AddAsync<TDto>(
+    public virtual async Task<TDto> AddAsync<TDto>(
         TEntity entity, 
         CancellationToken cancellationToken = default
     )
@@ -44,55 +44,55 @@ public class EfRepository<TEntity, TDbContext> : IRepository<TEntity> where TEnt
         return _mapper.Map<TDto>(updatedEntity);
     }
 
-    public async Task AddRangeAsync(
+    public virtual async Task AddRangeAsync(
         ICollection<TEntity> entities, 
         CancellationToken cancellationToken = default
     )
     {
-        await _dbContext
+        await DbContext
             .Set<TEntity>()
             .AddRangeAsync(entities, cancellationToken);
         
-        await _dbContext.SaveChangesAsync(cancellationToken);
+        await DbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<TEntity> UpdateAsync(
+    public virtual async Task<TEntity> UpdateAsync(
         TEntity entity, 
         CancellationToken cancellationToken = default
         )
 
     { 
-        var entry = _dbContext
+        var entry = DbContext
             .Set<TEntity>()
             .Update(entity);
 
-        await _dbContext.SaveChangesAsync(cancellationToken);
+        await DbContext.SaveChangesAsync(cancellationToken);
 
         return entry.Entity;
     }
 
-    public async Task<TDto> UpdateAsync<TDto>(TEntity entity, CancellationToken cancellationToken = default)
+    public virtual async Task<TDto> UpdateAsync<TDto>(TEntity entity, CancellationToken cancellationToken = default)
     {
         var updatedEntity = await UpdateAsync(entity, cancellationToken);
 
         return _mapper.Map<TDto>(updatedEntity);
     }
 
-    public async Task RemoveAsync(
+    public virtual async Task RemoveAsync(
         Expression<Func<TEntity, bool>> where, 
         CancellationToken cancellationToken = default
         )
     {
         var entity = await SingleAsync(where, cancellationToken);
 
-        _dbContext
+        DbContext
             .Set<TEntity>()
             .Remove(entity);
 
-        await _dbContext.SaveChangesAsync(cancellationToken);
+        await DbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<TEntity> SingleAsync(
+    public virtual async Task<TEntity> SingleAsync(
         Expression<Func<TEntity, bool>> filter, 
         CancellationToken cancellationToken = default
         )
@@ -111,12 +111,12 @@ public class EfRepository<TEntity, TDbContext> : IRepository<TEntity> where TEnt
         return entity;
     }
 
-    public async Task<TEntity?> SingleOrDefaultAsync(
+    public virtual async Task<TEntity?> SingleOrDefaultAsync(
         Expression<Func<TEntity, bool>> filter, 
         CancellationToken cancellationToken = default
         )
     {
-        var entity = await _dbContext
+        var entity = await DbContext
             .Set<TEntity>()
             .Where(filter)
             .SingleOrDefaultAsync(cancellationToken: cancellationToken);
@@ -124,12 +124,12 @@ public class EfRepository<TEntity, TDbContext> : IRepository<TEntity> where TEnt
         return entity;
     }
 
-    public async Task<bool> AnyAsync(
+    public virtual async Task<bool> AnyAsync(
         Expression<Func<TEntity, bool>> filter, 
         CancellationToken cancellationToken = default
         )
     {
-        var any = await _dbContext
+        var any = await DbContext
             .Set<TEntity>()
             .AnyAsync(filter, cancellationToken);
         

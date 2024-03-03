@@ -1,5 +1,6 @@
 using System.Reflection;
 using EduPulse.Application.Abstractions;
+using EduPulse.Application.Dtos;
 using EduPulse.Domain.Common;
 using EduPulse.Domain.Entities;
 using EduPulse.Domain.Enums;
@@ -64,6 +65,8 @@ public static class Infrastructure
         services.AddScoped<IRepository<SubjectEntity>,  EfRepository<SubjectEntity, TDbContext>>();
         services.AddScoped<IRepository<TeacherSubjectEntity>, EfRepository<TeacherSubjectEntity, TDbContext>>();
         services.AddScoped<IRepository<TeacherGroupEntity>,  EfRepository<TeacherGroupEntity, TDbContext>>();
+        services.AddScoped<IRepository<UserAnswerEntity>, EfRepository<UserAnswerEntity, TDbContext>>();
+        services.AddScoped<IRepository<QuestionEntity>,  EfRepository<QuestionEntity, TDbContext>>();
         
         return services;
     }

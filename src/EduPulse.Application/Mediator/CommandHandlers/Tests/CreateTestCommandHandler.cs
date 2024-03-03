@@ -49,6 +49,7 @@ public class CreateTestCommandHandler : CommandHandlerBase<CreateTestCommand, Te
                 var questionEntity = new QuestionEntity
                 {
                     Id = Guid.NewGuid(),
+                    TestId = testId,
                     Points = createQuestionCommand.Points,
                     Title = createQuestionCommand.Title,
                     Answers = answerEntities,

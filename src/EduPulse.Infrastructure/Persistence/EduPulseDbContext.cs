@@ -18,6 +18,7 @@ public class EduPulseDbContext : DbContext
     public required DbSet<TeacherGroupEntity> TeacherGroups { get; init; }
     public required DbSet<TestEntity> Tests { get; init; }
     public required DbSet<GroupEntity> Groups { get; init; }
+    public required DbSet<UserAnswerEntity> UserAnswers { get; init; }
     public required DbSet<SubjectEntity> Subjects { get; init; }
     
     public EduPulseDbContext(DbContextOptions<EduPulseDbContext> options) : base(options)
