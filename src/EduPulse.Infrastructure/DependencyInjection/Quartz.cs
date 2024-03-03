@@ -17,7 +17,7 @@ public static class Quartz
                 {
                     adoProviderOptions.ConnectionString = configuration.GetConnectionString("Postgres")!;
                 });
-                persistentStoreOptions.RetryInterval = TimeSpan.FromSeconds(1);
+                persistentStoreOptions.RetryInterval = TimeSpan.FromSeconds(5);
                 persistentStoreOptions.UseProperties = true;
                 persistentStoreOptions.UseNewtonsoftJsonSerializer();
             });

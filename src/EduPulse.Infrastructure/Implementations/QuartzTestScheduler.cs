@@ -20,11 +20,8 @@ public class QuartzTestScheduler : ITestScheduler
         CancellationToken cancellationToken = default
     )
     {
-        var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
-        
         var jobDetail = JobBuilder
             .Create<OpenTestJob>()
-            .WithIdentity(Guid.NewGuid().ToString())
             .SetJobData(new JobDataMap
             {
                 ["testId"] = testId.ToString(),
@@ -35,6 +32,8 @@ public class QuartzTestScheduler : ITestScheduler
             .Create()
             .StartAt(timestamp)
             .Build();
+        
+        var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
         
         await scheduler.ScheduleJob(jobDetail, trigger, cancellationToken);
     }
@@ -45,11 +44,8 @@ public class QuartzTestScheduler : ITestScheduler
         CancellationToken cancellationToken = default
     )
     {
-        var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
-        
         var jobDetail = JobBuilder
             .Create<CloseTestJob>()
-            .WithIdentity(Guid.NewGuid().ToString())
             .SetJobData(new JobDataMap
             {
                 ["testId"] = testId.ToString(),
@@ -60,6 +56,8 @@ public class QuartzTestScheduler : ITestScheduler
             .Create()
             .StartAt(timestamp)
             .Build();
+        
+        var scheduler = await _schedulerFactory.GetScheduler(cancellationToken);
         
         await scheduler.ScheduleJob(jobDetail, trigger, cancellationToken);
     }
