@@ -93,6 +93,6 @@ apiGroup
 
 apiGroup
     .MapGroup("admins")
-    .MapTeacherRoutes();
+    .MapAdminsRoutes();
 
 app.Run();
