@@ -30,6 +30,7 @@ public class CreateTestCommandHandler : CommandHandlerBase<CreateTestCommand, Te
         var testEntity = new TestEntity
         {
             Id = testId,
+            GroupId = command.GroupId,
             Title = command.Title,
             Description = command.Description,
             OpensAt = command.OpensAt,

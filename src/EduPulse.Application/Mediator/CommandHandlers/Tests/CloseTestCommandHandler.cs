@@ -35,6 +35,7 @@ public class CloseTestCommandHandler : CommandHandlerBase<CloseTestCommand, Test
             Channel = "tests.closed",
             Data = new TestClosedEventDto
             {
+                GroupId = testEntity.GroupId,
                 TestId = testEntity.Id
             }
         }, cancellationToken);

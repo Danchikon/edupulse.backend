@@ -21,11 +21,11 @@ public class CloseTestJob : IJob
 
     public async Task Execute(IJobExecutionContext context)
     {
-        var lotIdString = context.MergedJobDataMap.GetString("testId")!;
+        var testIdString = context.MergedJobDataMap.GetString("testId")!;
 
         var command = new CloseTestCommand
         {
-            Id = Guid.Parse(lotIdString)
+            Id = Guid.Parse(testIdString)
         };
         
         await _semaphore.WaitAsync();

@@ -30,6 +30,7 @@ public class CreateUserAnswerCommandHandler : CommandHandlerBase<CreateUserAnswe
             StudentId = command.StudentId,
             QuestionId = command.QuestionId,
             TestId = command.TestId,
+            Points = questionEntity.Points,
             CorrectValue = questionEntity.Answers.Single(answer => answer.Id == questionEntity.CorrectAnswerId).Value,
             Value = command.Value
         };

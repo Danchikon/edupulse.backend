@@ -12,6 +12,23 @@ public class Query
     [UseProjection]
     [UseFiltering]
     [UseSorting]
+    public IQueryable<ScheduledEmailDto> GetPagedScheduledEmails([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.ScheduledEmails.ProjectToType<ScheduledEmailDto>();
+    }
+    
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
+    public IQueryable<ScheduledEmailDto> GetScheduledEmails([Service] EduPulseDbContext dbContext)
+    {
+        return dbContext.ScheduledEmails.ProjectToType<ScheduledEmailDto>();
+    }
+    
+    [UseOffsetPaging]
+    [UseProjection]
+    [UseFiltering]
+    [UseSorting]
     public IQueryable<UserAnswerDto> GetPagedUserAnswers([Service] EduPulseDbContext dbContext)
     {
         return dbContext.UserAnswers.ProjectToType<UserAnswerDto>();

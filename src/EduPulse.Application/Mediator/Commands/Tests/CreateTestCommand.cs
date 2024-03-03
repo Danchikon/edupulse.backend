@@ -6,6 +6,7 @@ namespace EduPulse.Application.Mediator.Commands.Tests;
 public record CreateTestCommand : CommandBase<TestDto>
 {
     public required string Title { get; init; }
+    public required Guid GroupId { get; set; }
     public required string Description { get; init; }
     public required DateTimeOffset OpensAt { get; init; }
     public required DateTimeOffset ClosesAt { get; init; }

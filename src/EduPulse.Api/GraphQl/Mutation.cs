@@ -1,5 +1,7 @@
+using EduPulse.Application.Abstractions;
 using EduPulse.Application.Dtos;
 using EduPulse.Application.Mediator.Commands.Groups;
+using EduPulse.Application.Mediator.Commands.ScheduledEmails;
 using EduPulse.Application.Mediator.Commands.Subjects;
 using EduPulse.Application.Mediator.Commands.Teachers;
 using EduPulse.Application.Mediator.Commands.Tests;
@@ -27,6 +29,31 @@ public class Mutation
     )
     {
         return await mediator.Send(command, cancellationToken);
+    } 
+    
+    public async Task<ScheduledEmailDto> CreateScheduledEmailAsync(
+        CreateScheduledEmailCommand command, 
+        [Service] IMediator mediator,
+        CancellationToken cancellationToken
+    )
+    {
+        return await mediator.Send(command, cancellationToken);
+    } 
+    
+    public async Task<bool> SendAsync(
+        [Service] IEmailSender emailSender,
+        CancellationToken cancellationToken
+    )
+    {
+        await emailSender.SendEmailAsync(
+            "example@example.com", 
+            "daniel.hrovinsky@gmail.com", 
+            "sub", 
+            "bim",
+            cancellationToken
+            );
+        
+        return true;
     } 
     
     public async Task<TestDto> CreateTestAsync(

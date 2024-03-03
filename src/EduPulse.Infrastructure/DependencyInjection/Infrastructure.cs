@@ -1,3 +1,4 @@
+using System.Net.Mail;
 using System.Reflection;
 using EduPulse.Application.Abstractions;
 using EduPulse.Application.Dtos;
@@ -31,9 +32,11 @@ public static class Infrastructure
     {
         services.AddQuartzScheduling(configuration);
         services.AddMinioFilesStorage();
+        services.AddSmtpEmailSender();
         services.AddPasswordHasher();
         services.AddJsonWebTokenService();
         services.AddSingleton<ITestScheduler, QuartzTestScheduler>();
+        services.AddSingleton<IEmailScheduler, QuartzEmailScheduler>();
         services.AddScoped<IEventsPublisher, CentrifugoOutboxEventsPublisher<EduPulseDbContext>>();
         services.AddKeyedSingleton("tests", new SemaphoreSlim(1));
         
@@ -67,6 +70,7 @@ public static class Infrastructure
         services.AddScoped<IRepository<TeacherGroupEntity>,  EfRepository<TeacherGroupEntity, TDbContext>>();
         services.AddScoped<IRepository<UserAnswerEntity>, EfRepository<UserAnswerEntity, TDbContext>>();
         services.AddScoped<IRepository<QuestionEntity>,  EfRepository<QuestionEntity, TDbContext>>();
+        services.AddScoped<IRepository<ScheduledEmailEntity>,  EfRepository<ScheduledEmailEntity, TDbContext>>();
         
         return services;
     }
@@ -78,6 +82,26 @@ public static class Infrastructure
             .BindConfiguration(PasswordHasherOptions.Section);
         
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
+        
+        return services;
+    }
+    
+    public static IServiceCollection AddSmtpEmailSender(this IServiceCollection services)
+    {
+        services
+            .AddOptions<SmtpOptions>()
+            .BindConfiguration(SmtpOptions.Section);
+
+        services.AddScoped<SmtpClient>(provider =>
+        {
+            var options = provider.GetRequiredService<IOptions<SmtpOptions>>().Value;
+            
+            var smtpClient = new SmtpClient(options.Host, options.Port);
+
+            return smtpClient;
+        });
+        
+        services.AddScoped<IEmailSender, SmtpEmailSender>();
         
         return services;
     }

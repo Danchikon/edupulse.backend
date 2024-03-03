@@ -9,6 +9,7 @@ public interface ITestScheduler
         DateTimeOffset timestamp, 
         CancellationToken cancellationToken = default
         );
+    
     Task ScheduleCloseAsync(
         Guid testId, 
         DateTimeOffset timestamp,
