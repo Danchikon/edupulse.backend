@@ -46,7 +46,7 @@ public static class TeachersRouter
             var token = jsonWebTokenService.Create(new Dictionary<string, object>
             {
                 ["sub"] =  teacherDto.Id,
-                ["role"] = UserRole.Teacher
+                ["role"] = UserRole.Teacher.ToString()
             });
             
             return Results.Ok(new
@@ -73,7 +73,7 @@ public static class TeachersRouter
             var token = jsonWebTokenService.Create(new Dictionary<string, object>
             {
                 ["sub"] =  userDto.Id,
-                ["role"] = UserRole.Teacher
+                ["role"] = UserRole.Teacher.ToString()
             });
             
             return Results.Ok(new
