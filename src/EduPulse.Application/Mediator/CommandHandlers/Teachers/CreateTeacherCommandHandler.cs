@@ -33,7 +33,7 @@ public class CreateTeacherCommandHandler : CommandHandlerBase<CreateTeacherComma
     {
         var anyTeacher = await _teachersRepository.AnyAsync(teacher => teacher.Email == command.Email, cancellationToken);
 
-        if ( anyTeacher)
+        if (anyTeacher)
         {
             throw new BusinessException
             {

@@ -108,97 +108,97 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5be2eedb-52f5-49ff-852f-7af9b64116f1"),
+                            Id = new Guid("ea358f17-8bf4-40d0-8012-a53e58539e76"),
                             Code = "ІДА",
                             Title = "Адміністрування, державного управління та професійного розвитку інститут"
                         },
                         new
                         {
-                            Id = new Guid("3700d110-c1f2-40b1-b4c2-1d3633a6419e"),
+                            Id = new Guid("6a3e53f5-ae3b-4a92-8167-7e3ffb643c9b"),
                             Code = "ІАРД",
                             Title = "Архітектури та дизайну інститут"
                         },
                         new
                         {
-                            Id = new Guid("d228800c-170d-4db8-b3a1-03771990b950"),
+                            Id = new Guid("db7c95a1-b470-4a7d-8a01-a2e944dee190"),
                             Code = "ІБІС",
                             Title = "Будівництва та інженерних систем інститут"
                         },
                         new
                         {
-                            Id = new Guid("28139249-e9d8-42c7-80d3-c92e239e41bc"),
+                            Id = new Guid("a3123b16-be65-405e-b1c4-3b1969e80988"),
                             Code = "ІГДГ",
                             Title = "Геодезії інститут"
                         },
                         new
                         {
-                            Id = new Guid("234cbd67-3de3-4481-934a-bc02546575d7"),
+                            Id = new Guid("64ce574c-b23d-4571-b445-16675e98edd7"),
                             Code = "ІГСН",
                             Title = "Гуманітарних та соціальних наук інститут"
                         },
                         new
                         {
-                            Id = new Guid("1b9eec26-df7d-497f-b421-436173c116ed"),
+                            Id = new Guid("4930041c-ce0e-4b59-9caf-938e2afbe84c"),
                             Code = "ІНЕМ",
                             Title = "Економіки і менеджменту інститут"
                         },
                         new
                         {
-                            Id = new Guid("b1a1c978-62c9-4629-bb59-75a2c585ba4c"),
+                            Id = new Guid("4d0fb2a3-5c2d-48af-93a5-c585536bb9ae"),
                             Code = "ІЕСК",
                             Title = "Енергетики та систем керування інститут"
                         },
                         new
                         {
-                            Id = new Guid("001e781e-deae-479d-ac8a-589fb3144cde"),
+                            Id = new Guid("1e992a4d-9dec-4576-93a8-2dc038e916ce"),
                             Code = "КНІ",
                             Title = "Комп'ютерних наук та інформаційних технологій"
                         },
                         new
                         {
-                            Id = new Guid("0fe6ed77-682c-4d67-affc-19d8998fbc3b"),
+                            Id = new Guid("bf0ea459-1011-49e6-bc65-0ebd9e5f8b0c"),
                             Code = "ІКТА",
                             Title = "Комп'ютерних технологій, автоматики та метрології інститут"
                         },
                         new
                         {
-                            Id = new Guid("f0ab9474-cb0f-4361-84d9-1c7fdca0770c"),
+                            Id = new Guid("5c2d66d6-4018-4daf-a8c1-1d784d2ffcc1"),
                             Code = "ІМІТ",
                             Title = "Механічної інженерії та транспорту інститут"
                         },
                         new
                         {
-                            Id = new Guid("40ce2ccb-e0da-4a8e-80a1-f2cf5d324739"),
+                            Id = new Guid("838188cd-c3e1-44ba-aadc-7161e9559ef6"),
                             Code = "ІППО",
                             Title = "Права, психології та інноваційної освіти інститут"
                         },
                         new
                         {
-                            Id = new Guid("8d26d7a0-9e42-4e49-99a4-cd9fd0f6ca45"),
+                            Id = new Guid("5fb0be5a-bb70-472d-b9e4-a24cc867b853"),
                             Code = "ІМФН",
                             Title = "Прикладної математики та фундаментальних наук інститут"
                         },
                         new
                         {
-                            Id = new Guid("5735002f-87eb-4615-bc0b-e707307ac782"),
+                            Id = new Guid("17f2161b-eb53-4314-b32a-4a489c788b44"),
                             Code = "ІППТ",
                             Title = "Просторового планування та перспективних технологій інститут"
                         },
                         new
                         {
-                            Id = new Guid("b3441ade-2df3-47df-9015-c4d629339b9d"),
+                            Id = new Guid("77c0eead-3166-4813-8205-4f8168136882"),
                             Code = "ІСТР",
                             Title = "Сталого розвитку і ім. В.Чорновола інститут"
                         },
                         new
                         {
-                            Id = new Guid("817dce9c-ff78-477b-8cea-4d2d7fa7fff4"),
+                            Id = new Guid("54880322-70f3-4373-96e4-fbc92020d4d1"),
                             Code = "ІТРЕ",
                             Title = "Телекомунікацій, радіоелектроніки та електронної техніки інститут"
                         },
                         new
                         {
-                            Id = new Guid("5b13f774-3097-47e2-bbec-fb97bda64995"),
+                            Id = new Guid("23c3d117-b0bd-44ac-b79f-9f881260537c"),
                             Code = "ІХХТ",
                             Title = "Хімії та хімічних технологій інститут"
                         });
@@ -360,23 +360,16 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("EduPulse.Domain.Entities.TeacherGroupEntity", b =>
                 {
-                    b.Property<Guid>("GroupsId")
+                    b.Property<Guid>("GroupId")
                         .HasColumnType("uuid")
-                        .HasColumnName("groups_id");
+                        .HasColumnName("group_id");
 
                     b.Property<Guid>("TeacherId")
                         .HasColumnType("uuid")
                         .HasColumnName("teacher_id");
 
-                    b.Property<Guid>("GroupId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("group_id");
-
-                    b.HasKey("GroupsId", "TeacherId")
+                    b.HasKey("GroupId", "TeacherId")
                         .HasName("pk_teacher_groups");
-
-                    b.HasIndex("GroupId")
-                        .HasDatabaseName("ix_teacher_groups_group_id");
 
                     b.HasIndex("TeacherId")
                         .HasDatabaseName("ix_teacher_groups_teacher_id");
@@ -544,19 +537,12 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("EduPulse.Domain.Entities.TeacherGroupEntity", b =>
                 {
-                    b.HasOne("EduPulse.Domain.Entities.SubjectEntity", "Group")
+                    b.HasOne("EduPulse.Domain.Entities.GroupEntity", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_teacher_groups_subjects_group_id");
-
-                    b.HasOne("EduPulse.Domain.Entities.GroupEntity", null)
-                        .WithMany()
-                        .HasForeignKey("GroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_teacher_groups_groups_groups_id");
+                        .HasConstraintName("fk_teacher_groups_groups_group_id");
 
                     b.HasOne("EduPulse.Domain.Entities.TeacherEntity", "Teacher")
                         .WithMany()

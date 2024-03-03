@@ -193,23 +193,16 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 name: "teacher_groups",
                 columns: table => new
                 {
-                    teacher_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    groups_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    group_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    group_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    teacher_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_teacher_groups", x => new { x.groups_id, x.teacher_id });
+                    table.PrimaryKey("pk_teacher_groups", x => new { x.group_id, x.teacher_id });
                     table.ForeignKey(
-                        name: "fk_teacher_groups_groups_groups_id",
-                        column: x => x.groups_id,
-                        principalTable: "groups",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_teacher_groups_subjects_group_id",
+                        name: "fk_teacher_groups_groups_group_id",
                         column: x => x.group_id,
-                        principalTable: "subjects",
+                        principalTable: "groups",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -243,22 +236,22 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
                 columns: new[] { "id", "code", "title" },
                 values: new object[,]
                 {
-                    { new Guid("001e781e-deae-479d-ac8a-589fb3144cde"), "КНІ", "Комп'ютерних наук та інформаційних технологій" },
-                    { new Guid("0fe6ed77-682c-4d67-affc-19d8998fbc3b"), "ІКТА", "Комп'ютерних технологій, автоматики та метрології інститут" },
-                    { new Guid("1b9eec26-df7d-497f-b421-436173c116ed"), "ІНЕМ", "Економіки і менеджменту інститут" },
-                    { new Guid("234cbd67-3de3-4481-934a-bc02546575d7"), "ІГСН", "Гуманітарних та соціальних наук інститут" },
-                    { new Guid("28139249-e9d8-42c7-80d3-c92e239e41bc"), "ІГДГ", "Геодезії інститут" },
-                    { new Guid("3700d110-c1f2-40b1-b4c2-1d3633a6419e"), "ІАРД", "Архітектури та дизайну інститут" },
-                    { new Guid("40ce2ccb-e0da-4a8e-80a1-f2cf5d324739"), "ІППО", "Права, психології та інноваційної освіти інститут" },
-                    { new Guid("5735002f-87eb-4615-bc0b-e707307ac782"), "ІППТ", "Просторового планування та перспективних технологій інститут" },
-                    { new Guid("5b13f774-3097-47e2-bbec-fb97bda64995"), "ІХХТ", "Хімії та хімічних технологій інститут" },
-                    { new Guid("5be2eedb-52f5-49ff-852f-7af9b64116f1"), "ІДА", "Адміністрування, державного управління та професійного розвитку інститут" },
-                    { new Guid("817dce9c-ff78-477b-8cea-4d2d7fa7fff4"), "ІТРЕ", "Телекомунікацій, радіоелектроніки та електронної техніки інститут" },
-                    { new Guid("8d26d7a0-9e42-4e49-99a4-cd9fd0f6ca45"), "ІМФН", "Прикладної математики та фундаментальних наук інститут" },
-                    { new Guid("b1a1c978-62c9-4629-bb59-75a2c585ba4c"), "ІЕСК", "Енергетики та систем керування інститут" },
-                    { new Guid("b3441ade-2df3-47df-9015-c4d629339b9d"), "ІСТР", "Сталого розвитку і ім. В.Чорновола інститут" },
-                    { new Guid("d228800c-170d-4db8-b3a1-03771990b950"), "ІБІС", "Будівництва та інженерних систем інститут" },
-                    { new Guid("f0ab9474-cb0f-4361-84d9-1c7fdca0770c"), "ІМІТ", "Механічної інженерії та транспорту інститут" }
+                    { new Guid("17f2161b-eb53-4314-b32a-4a489c788b44"), "ІППТ", "Просторового планування та перспективних технологій інститут" },
+                    { new Guid("1e992a4d-9dec-4576-93a8-2dc038e916ce"), "КНІ", "Комп'ютерних наук та інформаційних технологій" },
+                    { new Guid("23c3d117-b0bd-44ac-b79f-9f881260537c"), "ІХХТ", "Хімії та хімічних технологій інститут" },
+                    { new Guid("4930041c-ce0e-4b59-9caf-938e2afbe84c"), "ІНЕМ", "Економіки і менеджменту інститут" },
+                    { new Guid("4d0fb2a3-5c2d-48af-93a5-c585536bb9ae"), "ІЕСК", "Енергетики та систем керування інститут" },
+                    { new Guid("54880322-70f3-4373-96e4-fbc92020d4d1"), "ІТРЕ", "Телекомунікацій, радіоелектроніки та електронної техніки інститут" },
+                    { new Guid("5c2d66d6-4018-4daf-a8c1-1d784d2ffcc1"), "ІМІТ", "Механічної інженерії та транспорту інститут" },
+                    { new Guid("5fb0be5a-bb70-472d-b9e4-a24cc867b853"), "ІМФН", "Прикладної математики та фундаментальних наук інститут" },
+                    { new Guid("64ce574c-b23d-4571-b445-16675e98edd7"), "ІГСН", "Гуманітарних та соціальних наук інститут" },
+                    { new Guid("6a3e53f5-ae3b-4a92-8167-7e3ffb643c9b"), "ІАРД", "Архітектури та дизайну інститут" },
+                    { new Guid("77c0eead-3166-4813-8205-4f8168136882"), "ІСТР", "Сталого розвитку і ім. В.Чорновола інститут" },
+                    { new Guid("838188cd-c3e1-44ba-aadc-7161e9559ef6"), "ІППО", "Права, психології та інноваційної освіти інститут" },
+                    { new Guid("a3123b16-be65-405e-b1c4-3b1969e80988"), "ІГДГ", "Геодезії інститут" },
+                    { new Guid("bf0ea459-1011-49e6-bc65-0ebd9e5f8b0c"), "ІКТА", "Комп'ютерних технологій, автоматики та метрології інститут" },
+                    { new Guid("db7c95a1-b470-4a7d-8a01-a2e944dee190"), "ІБІС", "Будівництва та інженерних систем інститут" },
+                    { new Guid("ea358f17-8bf4-40d0-8012-a53e58539e76"), "ІДА", "Адміністрування, державного управління та професійного розвитку інститут" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -302,11 +295,6 @@ namespace EduPulse.Infrastructure.Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "ix_students_group_id",
                 table: "students",
-                column: "group_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_teacher_groups_group_id",
-                table: "teacher_groups",
                 column: "group_id");
 
             migrationBuilder.CreateIndex(
