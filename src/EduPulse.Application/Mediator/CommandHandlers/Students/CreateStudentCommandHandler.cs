@@ -43,6 +43,7 @@ public class CreateStudentCommandHandler : CommandHandlerBase<CreateStudentComma
         var studentEntity = new StudentEntity
         {
             Id = studentId,
+            Avatar = new Uri($"https://api.dicebear.com/7.x/thumbs/svg?seed={studentId}"),
             GroupId = command.GroupId,
             PhoneNumber = command.PhoneNumber,
             Email = command.Email,

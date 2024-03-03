@@ -45,6 +45,7 @@ public class EduPulseDbContext : DbContext
                 {
                     Id = Guid.Parse("af41f834-c0f9-46be-89bf-51708b4adec9"),
                     FullName = "Daniel Hrovinsky",
+                    Avatar = new Uri("https://api.dicebear.com/7.x/thumbs/svg?seed=af41f834-c0f9-46be-89bf-51708b4adec9"),
                     CreatedAt = DateTimeOffset.UtcNow,
                     Email = "daniel.hrovinsky@gmail.com",
                     PasswordHash = "thj3yNIF3ZKC1UziLTuSh7CsSUTT/yR1nvu83Fx9oek="

@@ -50,6 +50,7 @@ public class CreateTeacherCommandHandler : CommandHandlerBase<CreateTeacherComma
         var studentEntity = new TeacherEntity
         {
             Id = teacherId,
+            Avatar = new Uri($"https://api.dicebear.com/7.x/thumbs/svg?seed={teacherId}"),
             Email = command.Email,
             FullName = command.FullName,
             PasswordHash = passwordHash,

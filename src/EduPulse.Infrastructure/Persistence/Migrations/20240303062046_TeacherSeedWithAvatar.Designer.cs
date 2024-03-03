@@ -4,6 +4,7 @@ using EduPulse.Domain.Enums;
 using EduPulse.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EduPulse.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(EduPulseDbContext))]
-    partial class EduPulseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240303062046_TeacherSeedWithAvatar")]
+    partial class TeacherSeedWithAvatar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
